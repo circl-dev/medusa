@@ -1,5 +1,23 @@
 # @medusajs/framework
 
+## 2.5.2
+
+### Patch Changes
+
+- [#11638](https://github.com/medusajs/medusa/pull/11638) [`b0a16488e01632bc2bfee4d4bf2a3e1d3e11b104`](https://github.com/medusajs/medusa/commit/b0a16488e01632bc2bfee4d4bf2a3e1d3e11b104) Thanks [@thetutlage](https://github.com/thetutlage)! - feat: add middleware-file-loader
+
+- [#11636](https://github.com/medusajs/medusa/pull/11636) [`ca6a15717d05de112ca00ca56d65beb2ab0f2598`](https://github.com/medusajs/medusa/commit/ca6a15717d05de112ca00ca56d65beb2ab0f2598) Thanks [@adrien2p](https://github.com/adrien2p)! - chore(): Add support for extra pool configuration
+
+- [#11592](https://github.com/medusajs/medusa/pull/11592) [`9e2af4801daeb72d0e5a4d5ae674bdf6d415cf58`](https://github.com/medusajs/medusa/commit/9e2af4801daeb72d0e5a4d5ae674bdf6d415cf58) Thanks [@thetutlage](https://github.com/thetutlage)! - feat: add routes loader
+
+- Updated dependencies [[`8bb0a25f573c62ca1d1bcd7af184b0d0cf98e125`](https://github.com/medusajs/medusa/commit/8bb0a25f573c62ca1d1bcd7af184b0d0cf98e125), [`698a520729a3045cd13eed5ee0e5120a563e9261`](https://github.com/medusajs/medusa/commit/698a520729a3045cd13eed5ee0e5120a563e9261), [`eeebb35758ea443468dd2355a7ea761dfe24babc`](https://github.com/medusajs/medusa/commit/eeebb35758ea443468dd2355a7ea761dfe24babc), [`93cbc6b6695f236fa39b66169de971228888f1b9`](https://github.com/medusajs/medusa/commit/93cbc6b6695f236fa39b66169de971228888f1b9), [`ca6a15717d05de112ca00ca56d65beb2ab0f2598`](https://github.com/medusajs/medusa/commit/ca6a15717d05de112ca00ca56d65beb2ab0f2598), [`c250de79192bda1b1cd217bcca37f458c693de1d`](https://github.com/medusajs/medusa/commit/c250de79192bda1b1cd217bcca37f458c693de1d), [`d814d9540e76256be23d733b73cf5a63aa380c8b`](https://github.com/medusajs/medusa/commit/d814d9540e76256be23d733b73cf5a63aa380c8b), [`d254b2ddba3fba4fb60e1076a6bc4e7d425bbd30`](https://github.com/medusajs/medusa/commit/d254b2ddba3fba4fb60e1076a6bc4e7d425bbd30), [`b42f151be31161a5d7a73132ee6794b990403d76`](https://github.com/medusajs/medusa/commit/b42f151be31161a5d7a73132ee6794b990403d76)]:
+  - @medusajs/types@2.5.2
+  - @medusajs/utils@2.5.2
+  - @medusajs/workflows-sdk@2.5.2
+  - @medusajs/modules-sdk@2.5.2
+  - @medusajs/orchestration@2.5.2
+  - @medusajs/telemetry@2.5.2
+
 ## 2.5.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @medusajs/cart
 
+## 2.5.2
+
+### Patch Changes
+
+- [#11632](https://github.com/medusajs/medusa/pull/11632) [`caf83cf78cb6d2dbd1837f6814062dafecbd04fa`](https://github.com/medusajs/medusa/commit/caf83cf78cb6d2dbd1837f6814062dafecbd04fa) Thanks [@adrien2p](https://github.com/adrien2p)! - chore(): Prevent workflow steps to even call modules when not necessary
+
 ## 2.5.1
 
 ## 2.5.0
