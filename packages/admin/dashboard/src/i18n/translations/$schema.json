@@ -5353,6 +5353,138 @@
           },
           "required": ["displayId", "refundableAmount", "returnableQuantity"],
           "additionalProperties": false
+        },
+
+        "create": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "header": {
+              "type": "string"
+            },
+            "successToast": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "object",
+              "properties": {
+                "enableVisit": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "hint": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "hint"],
+                  "additionalProperties": false
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "placeholder": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "placeholder"],
+                  "additionalProperties": false
+                },
+                "name": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "placeholder": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "placeholder"],
+                  "additionalProperties": false
+                },
+                "product_id": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "placeholder": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "placeholder"],
+                  "additionalProperties": false
+                },
+                "quantity": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "placeholder": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "placeholder"],
+                  "additionalProperties": false
+                },
+                "title": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "placeholder": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "placeholder"],
+                  "additionalProperties": false
+                },
+                "unit_price": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "placeholder": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "placeholder"],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "enableVisit",
+                "address",
+                "name",
+                "product_id",
+                "quantity",
+                "title",
+                "unit_price"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "title",
+            "description",
+            "header",
+            "successToast",
+            "fields"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -5380,7 +5512,8 @@
         "refund",
         "customer",
         "activity",
-        "fields"
+        "fields",
+        "create"
       ],
       "additionalProperties": false
     },

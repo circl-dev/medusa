@@ -1417,6 +1417,42 @@
       "displayId": "Display ID",
       "refundableAmount": "Refundable amount",
       "returnableQuantity": "Returnable quantity"
+    },
+    "create": {
+      "title": "Create Order",
+      "description": "Create a new order from the Admin page.",
+      "header": "Create Order",
+      "successToast": "Order created with success.",
+      "fields": {
+        "enableVisit": {
+          "label": "Schedule a visit?",
+          "hint": "If you want to schedule a visit to the customer, enable this option."
+        },
+        "address": {
+          "label": "Address",
+          "placeholder": "Customer Address"
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Order Name"
+        },
+        "product_id": {
+          "label": "Product ID",
+          "placeholder": "Product ID"
+        },
+        "quantity": {
+          "label": "Quantity",
+          "placeholder": "Product Quantity"
+        },
+        "title": {
+          "label": "Title",
+          "placeholder": "Order Title"
+        },
+        "unit_price": {
+          "label": "Unit Price",
+          "placeholder": "Order Product Price"
+        }
+      }
     }
   },
   "draftOrders": {
