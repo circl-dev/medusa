@@ -5,16 +5,20 @@ import { OrderCreateGeneralSection } from "./components/order-create-details-gen
 import { OrderCreateSchemaType } from "../types"
 import { SwitchBox } from "../../../../components/common/switch-box"
 import { OrderCreateExtendedSection } from "./components/order-create-details-extended-section"
-import { AdminProduct } from "@medusajs/types"
+import { AdminCustomer, AdminProduct, AdminRegion } from "@medusajs/types"
 
 type OrderAttributesProps = {
   form: UseFormReturn<OrderCreateSchemaType>
   products: AdminProduct[]
+  customers: AdminCustomer[]
+  regions: AdminRegion[]
 }
 
 export const OrderCreateDetailsForm = ({
   form,
   products,
+  customers,
+  regions,
 }: OrderAttributesProps) => {
   const { t } = useTranslation()
   return (
@@ -24,11 +28,16 @@ export const OrderCreateDetailsForm = ({
         <div className="flex flex-col gap-y-6">
           <SwitchBox
             control={form.control}
+            defaultValue={false}
             name="isVisit"
             label={t("orders.create.fields.enableVisit.label")}
             description={t("orders.create.fields.enableVisit.hint")}
           />
-          <OrderCreateGeneralSection form={form} />
+          <OrderCreateGeneralSection
+            form={form}
+            customers={customers}
+            regions={regions}
+          />
           {!form.watch("isVisit") && (
             <OrderCreateExtendedSection form={form} products={products} />
           )}

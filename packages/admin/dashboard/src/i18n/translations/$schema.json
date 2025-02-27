@@ -5399,6 +5399,32 @@
                   "required": ["label", "placeholder"],
                   "additionalProperties": false
                 },
+                "customer": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "hint": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "hint"],
+                  "additionalProperties": false
+                },
+                "region": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "hint": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "hint"],
+                  "additionalProperties": false
+                },
                 "name": {
                   "type": "object",
                   "properties": {
@@ -5412,17 +5438,20 @@
                   "required": ["label", "placeholder"],
                   "additionalProperties": false
                 },
-                "product_id": {
+                "products": {
                   "type": "object",
                   "properties": {
                     "label": {
                       "type": "string"
                     },
-                    "placeholder": {
+                    "hint": {
+                      "type": "string"
+                    },
+                    "search": {
                       "type": "string"
                     }
                   },
-                  "required": ["label", "placeholder"],
+                  "required": ["label", "hint", "search"],
                   "additionalProperties": false
                 },
                 "quantity": {
@@ -5468,8 +5497,10 @@
               "required": [
                 "enableVisit",
                 "address",
+                "customer",
+                "region",
                 "name",
-                "product_id",
+                "products",
                 "quantity",
                 "title",
                 "unit_price"

@@ -1432,13 +1432,22 @@
           "label": "Address",
           "placeholder": "Customer Address"
         },
+        "customer": {
+          "label": "Customer",
+          "hint": "Select the customer you want to associate the order with."
+        },
+        "region": {
+          "label": "Region",
+          "hint": "Select which region the order should be handled in."
+        },
         "name": {
           "label": "Name",
           "placeholder": "Order Name"
         },
-        "product_id": {
-          "label": "Product ID",
-          "placeholder": "Product ID"
+        "products": {
+          "label": "Products to Order",
+          "hint": "Select the number of products you wish to order.",
+          "search": "Search Product"
         },
         "quantity": {
           "label": "Quantity",

@@ -1,16 +1,27 @@
 import { useTranslation } from "react-i18next"
 import { RouteFocusModal } from "../../../components/modals"
 import { OrderCreateForm } from "./order-create-form"
-import { useProducts } from "../../../hooks/api"
+import { useCustomers, useProducts, useRegions } from "../../../hooks/api"
 
 export const OrderCreate = () => {
   const { t } = useTranslation()
   const { products, isLoading: loadingProducts } = useProducts({
     fields: "*variants",
   })
-  console.log(products)
 
-  const ready = !!products && !loadingProducts
+  const { customers, isLoading: loadingCustomers } = useCustomers()
+
+  const { regions, isLoading: loadingRegions } = useRegions()
+
+  const ready =
+    !!products &&
+    !loadingProducts &&
+    !!customers &&
+    !loadingCustomers &&
+    !!regions &&
+    !loadingRegions
+  console.log(regions)
+
   return (
     <RouteFocusModal>
       <RouteFocusModal.Title asChild>
@@ -19,7 +30,13 @@ export const OrderCreate = () => {
       <RouteFocusModal.Description asChild>
         <span className="sr-only">{t("orders.create.description")}</span>
       </RouteFocusModal.Description>
-      {ready && <OrderCreateForm products={products} />}
+      {ready && (
+        <OrderCreateForm
+          products={products}
+          customers={customers}
+          regions={regions}
+        />
+      )}
     </RouteFocusModal>
   )
 }

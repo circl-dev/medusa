@@ -2,22 +2,34 @@ import { z } from "zod"
 
 const VisitSchema = z.object({
   isVisit: z.literal(true),
+  region_id: z.string(),
+  customer_id: z.string(),
   shipping_address: z.string(),
 })
 
 const NonVisitSchema = z.object({
   isVisit: z.literal(false),
-  products: z.array(
-    z.object({
-      variant_id: z.string(),
-      quantity: z.number(),
-    })
-  ),
+  region_id: z.string(),
+  customer_id: z.string(),
   shipping_address: z.string(),
-  currency_code: z.string().optional(),
+  variants: z
+    .record(
+      z.object({
+        quantity: z.number().optional(),
+      })
+    )
+    .refine(
+      (variants) =>
+        Object.values(variants).some(
+          (variant) => variant.quantity && variant.quantity > 0
+        ),
+      {
+        message: "At least one variant must have a quantity greater than 0",
+      }
+    ),
 })
 
 export const OrderCreateSchema = z.discriminatedUnion("isVisit", [
-  VisitSchema,
   NonVisitSchema,
+  VisitSchema,
 ])
