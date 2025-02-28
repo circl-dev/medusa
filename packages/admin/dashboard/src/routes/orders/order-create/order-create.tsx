@@ -20,7 +20,6 @@ export const OrderCreate = () => {
     !loadingCustomers &&
     !!regions &&
     !loadingRegions
-  console.log(regions)
 
   return (
     <RouteFocusModal>

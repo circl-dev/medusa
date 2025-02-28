@@ -33,7 +33,6 @@ export const OrderCreateExtendedSection = ({
 
   // @ts-ignore todo fix this later
   const orderError = form.formState?.errors?.variants?.root?.message
-  console.log("orderError", orderError)
 
   return (
     <div id="general" className="flex flex-col gap-y-6">

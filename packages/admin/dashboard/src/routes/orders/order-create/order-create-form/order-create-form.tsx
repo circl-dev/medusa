@@ -31,8 +31,6 @@ export const OrderCreateForm = ({
     resolver: zodResolver(OrderCreateSchema),
   })
 
-  console.log(products)
-
   type CreateAdminOrderInput = {
     is_visit?: boolean /* If true, this order is a request for visit from the customer */
     products: {
@@ -65,7 +63,6 @@ export const OrderCreateForm = ({
   })
 
   const handleSubmit = form.handleSubmit(async (values, e) => {
-    console.log(values)
     // TODO understand why ts complains about the values type
     // @ts-ignore
     const filteredArray = values.isVisit
@@ -78,14 +75,6 @@ export const OrderCreateForm = ({
             // @ts-ignore
             quantity: value.quantity || 0,
           }))
-    console.log("request:", {
-      is_visit: values.isVisit,
-      products: filteredArray,
-      shipping_address: values.shipping_address,
-      customer_id: values.customer_id,
-      region_id: values.region_id,
-      sales_channel_id: "sc_01JKX2B418X0C1XPRHF7MV177T",
-    })
     mutate({
       is_visit: values.isVisit,
       products: filteredArray,
