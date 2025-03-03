@@ -18,6 +18,8 @@ export default defineConfig(({ mode }) => {
   const MEDUSA_PROJECT = env.VITE_MEDUSA_PROJECT || null
   const sources = MEDUSA_PROJECT ? [MEDUSA_PROJECT] : []
 
+  const ALLOWED_HOST = env.VITE_ALLOWED_HOST || "localhost"
+
   return {
     plugins: [
       inspect(),
@@ -36,6 +38,9 @@ export default defineConfig(({ mode }) => {
       host: "0.0.0.0",
       port: Number(process.env.PORT) || 5173,
       strictPort: true,
+      allowedHosts: [
+        ALLOWED_HOST,
+      ],
     },
   }
 })
