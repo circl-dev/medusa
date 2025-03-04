@@ -5,6 +5,7 @@ import { OrderCreateSchemaType } from "../../../types"
 import { Form } from "../../../../../../components/common/form"
 import { AdminCustomer, AdminRegion } from "@medusajs/types"
 import { useRetrieveCustomerAddresses } from "../../../../../../hooks/api/customers"
+import { useMemo } from "react"
 
 type OrderCreateGeneralSectionProps = {
   form: UseFormReturn<OrderCreateSchemaType>
@@ -23,34 +24,47 @@ export const OrderCreateGeneralSection = ({
     form.watch("customer_id")
   )
 
-  if (addresses?.length) {
-    if (addresses[0].address_1) {
-      form.setValue("shipping_address.address_1", addresses[0].address_1)
-    }
-    if (addresses[0].city) {
-      form.setValue("shipping_address.city", addresses[0].city)
-    }
-    if (addresses[0].country_code) {
-      form.setValue("shipping_address.country_code", addresses[0].country_code)
-    }
-    if (addresses[0].postal_code) {
-      form.setValue("shipping_address.postal_code", addresses[0].postal_code)
-    }
-    if (addresses[0].phone) {
-      form.setValue("shipping_address.phone", addresses[0].phone)
-    }
-
-    if (addresses[0].country_code) {
-      const region = regions.find(
-        (r) =>
-          r.countries &&
-          r.countries.some((c) => c.iso_2 === addresses[0].country_code)
-      )
-      if (region) {
-        form.setValue("region_id", region.id)
+  useMemo(() => {
+    if (addresses?.length && regions?.length && form) {
+      if (addresses[0].address_1) {
+        form.setValue("shipping_address.address_1", addresses[0].address_1)
       }
+      if (addresses[0].city) {
+        form.setValue("shipping_address.city", addresses[0].city)
+      }
+      if (addresses[0].country_code) {
+        form.setValue(
+          "shipping_address.country_code",
+          addresses[0].country_code
+        )
+      }
+      if (addresses[0].postal_code) {
+        form.setValue("shipping_address.postal_code", addresses[0].postal_code)
+      }
+      if (addresses[0].phone) {
+        form.setValue("shipping_address.phone", addresses[0].phone)
+      }
+
+      if (addresses[0].country_code) {
+        const region = regions.find(
+          (r) =>
+            r.countries &&
+            r.countries.some((c) => c.iso_2 === addresses[0].country_code)
+        )
+        if (region) {
+          form.setValue("region_id", region.id)
+        }
+      }
+    } else {
+      form.setValue("shipping_address", {
+        address_1: "",
+        city: "",
+        country_code: "",
+        postal_code: "",
+        phone: "",
+      })
     }
-  }
+  }, [form, regions, addresses])
 
   return (
     <div id="general" className="flex flex-col gap-y-6">
@@ -106,7 +120,9 @@ export const OrderCreateGeneralSection = ({
                       <Form.Label>
                         {t("orders.create.fields.region.label")}
                       </Form.Label>
-                      <Form.Hint>{t("orders.create.fields.region.hint")}</Form.Hint>
+                      <Form.Hint>
+                        {t("orders.create.fields.region.hint")}
+                      </Form.Hint>
                     </div>
                     <div className="flex-1">
                       <Form.Control>
@@ -136,11 +152,15 @@ export const OrderCreateGeneralSection = ({
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label>{t("orders.create.fields.address.label")}</Form.Label>
+                  <Form.Label>
+                    {t("orders.create.fields.address.label")}
+                  </Form.Label>
                   <Form.Control>
                     <Input
                       {...field}
-                      placeholder={t("orders.create.fields.address.placeholder")}
+                      placeholder={t(
+                        "orders.create.fields.address.placeholder"
+                      )}
                     />
                   </Form.Control>
                 </Form.Item>
