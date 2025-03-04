@@ -636,6 +636,11 @@ export const RouteMap: RouteObject[] = [
                     lazy: () => import("../../routes/customers/customer-edit"),
                   },
                   {
+                    path: "edit-address",
+                    lazy: () =>
+                      import("../../routes/customers/customer-address-edit"),
+                  },
+                  {
                     path: "add-customer-groups",
                     lazy: () =>
                       import(

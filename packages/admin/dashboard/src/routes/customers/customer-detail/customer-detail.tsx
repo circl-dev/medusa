@@ -3,11 +3,15 @@ import { useLoaderData, useParams } from "react-router-dom"
 import { SingleColumnPageSkeleton } from "../../../components/common/skeleton"
 import { SingleColumnPage } from "../../../components/layout/pages"
 import { useDashboardExtension } from "../../../extensions"
-import { useCustomer } from "../../../hooks/api/customers"
+import {
+  useCustomer,
+  useRetrieveCustomerAddresses,
+} from "../../../hooks/api/customers"
 import { CustomerGeneralSection } from "./components/customer-general-section"
 import { CustomerGroupSection } from "./components/customer-group-section"
 import { CustomerOrderSection } from "./components/customer-order-section"
 import { customerLoader } from "./loader"
+import { CustomerAddressSection } from "./components/customer-address-section"
 
 export const CustomerDetail = () => {
   const { id } = useParams()
@@ -15,10 +19,18 @@ export const CustomerDetail = () => {
   const initialData = useLoaderData() as Awaited<
     ReturnType<typeof customerLoader>
   >
-  const { customer, isLoading, isError, error } = useCustomer(id!, undefined, {
-    initialData,
-  })
+  const { customer, isLoading, isError, error } = useCustomer(
+    id!,
+    {
+      fields: "*,*groups",
+    },
+    {
+      initialData,
+    }
+  )
+  const { data: addresses } = useRetrieveCustomerAddresses(id!)
 
+  console.log("Addresses", addresses)
   const { getWidgets } = useDashboardExtension()
 
   if (isLoading || !customer) {
@@ -41,6 +53,12 @@ export const CustomerDetail = () => {
       showMetadata
     >
       <CustomerGeneralSection customer={customer} />
+      {addresses && (
+        <CustomerAddressSection
+          customerId={customer.id}
+          addresses={addresses}
+        />
+      )}
       <CustomerOrderSection customer={customer} />
       <CustomerGroupSection customer={customer} />
     </SingleColumnPage>

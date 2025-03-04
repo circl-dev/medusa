@@ -49,15 +49,18 @@ export function OrderCreateFulfillmentItem({
 
     const { inventory } = variant
 
+    
     const locationInventory = inventory[0]?.location_levels?.find(
       (inv) => inv.location_id === locationId
     )
+    console.log("Location Inventory", locationInventory)
 
     if (!locationInventory) {
       return {}
     }
 
     const reservedQuantityForItem = itemReservedQuantitiesMap.get(item.id) ?? 0
+    console.log("Item", reservedQuantityForItem, itemReservedQuantitiesMap)
 
     return {
       availableQuantity:

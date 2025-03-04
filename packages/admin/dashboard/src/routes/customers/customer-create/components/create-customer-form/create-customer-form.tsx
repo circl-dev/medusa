@@ -20,7 +20,11 @@ const CreateCustomerSchema = zod.object({
   phone: zod.string().optional(),
 })
 
-export const CreateCustomerForm = () => {
+type CreateCustomerFormProps = {
+  onSubmit?: (customerId: string) => void
+}
+
+export const CreateCustomerForm = ({ onSubmit }: CreateCustomerFormProps) => {
   const { t } = useTranslation()
   const { handleSuccess } = useRouteModal()
 
@@ -53,7 +57,11 @@ export const CreateCustomerForm = () => {
               email: customer.email,
             })
           )
-          handleSuccess(`/customers/${customer.id}`)
+          if (onSubmit) {
+            onSubmit(customer.id)
+          } else {
+            handleSuccess(`/customers/${customer.id}`)
+          }
         },
         onError: (error) => {
           toast.error(error.message)
@@ -169,7 +177,7 @@ export const CreateCustomerForm = () => {
               type="submit"
               isLoading={isPending}
             >
-              {t("actions.create")}
+              {onSubmit ? t("actions.add") : t("actions.create")}
             </Button>
           </div>
         </RouteFocusModal.Footer>

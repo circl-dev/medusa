@@ -34,6 +34,7 @@ import {
   TotalCell,
   TotalHeader,
 } from "../../../components/table/table-cells/order/total-cell"
+import { TypeHeader } from "../../../components/table/table-cells/order/type-cell"
 
 // We have to use any here, as the type of Order is so complex that it lags the TS server
 const columnHelper = createColumnHelper<HttpTypes.AdminOrder>()
@@ -69,6 +70,17 @@ export const useOrderTableColumns = (props: UseOrderTableColumnsProps) => {
           const customer = getValue()
 
           return <CustomerCell customer={customer} />
+        },
+      }),
+      columnHelper.accessor("metadata", {
+        header: () => <TypeHeader />,
+        cell: ({ getValue }) => {
+          const status = getValue()
+          if (status && status.is_visit) {
+            return <span>Visit</span>
+          } else {
+            return <span>Order</span>
+          }
         },
       }),
       columnHelper.accessor("sales_channel", {

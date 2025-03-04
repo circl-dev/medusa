@@ -48,6 +48,7 @@ export function OrderCreateFulfillmentForm({
       new Map((reservations || []).map((r) => [r.line_item_id, r.quantity])),
     [reservations]
   )
+  console.log(reservations, itemReservedQuantitiesMap)
 
   const [fulfillableItems, setFulfillableItems] = useState(() =>
     (order.items || []).filter(
@@ -77,6 +78,8 @@ export function OrderCreateFulfillmentForm({
   })
 
   const { stock_locations = [] } = useStockLocations()
+
+  console.log("Stock", stock_locations)
 
   const { shipping_options = [], isLoading: isShippingOptionsLoading } =
     useShippingOptions({

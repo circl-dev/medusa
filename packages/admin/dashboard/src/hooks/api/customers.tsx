@@ -6,6 +6,7 @@ import {
   UseQueryOptions,
   useMutation,
   useQuery,
+  useQueryClient,
 } from "@tanstack/react-query"
 import { sdk } from "../../lib/client"
 import { queryClient } from "../../lib/query-client"
@@ -146,5 +147,71 @@ export const useBatchCustomerCustomerGroups = (
       options?.onSuccess?.(data, variables, context)
     },
     ...options,
+  })
+}
+
+export const useRetrieveCustomerAddresses = (customerId: string) => {
+  return useQuery({
+    queryKey: ["customer", "addresses", customerId],
+    queryFn: async () => {
+      const path = `/admin/customers/${customerId}/addresses`
+      const response = await sdk.client.fetch<{
+        addresses: HttpTypes.AdminCustomerAddress[]
+      }>(path)
+      return response.addresses
+    },
+  })
+}
+export const useDeleteCustomerAddress = (
+  customerId: string,
+  addressId: string
+) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async () => {
+      const path = `/admin/customers/${customerId}/addresses/${addressId}`
+      return sdk.client.fetch(path, { method: "DELETE" })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["customer", "addresses", customerId],
+      })
+    },
+  })
+}
+
+export const useUpdateCustomerAddress = (
+  customerId: string,
+  addressId: string
+) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: Partial<HttpTypes.AdminCustomerAddress>) => {
+      const path = `/admin/customers/${customerId}/addresses/${addressId}`
+      return sdk.client.fetch(path, { method: "POST", body: data })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["customer", "addresses", customerId],
+      })
+    },
+  })
+}
+
+export const useCreateCustomerAddress = (customerId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: Partial<HttpTypes.AdminCustomerAddress>) => {
+      const path = `/admin/customers/${customerId}/addresses`
+      return sdk.client.fetch(path, { method: "POST", body: data })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["customer", "addresses", customerId],
+      })
+    },
   })
 }

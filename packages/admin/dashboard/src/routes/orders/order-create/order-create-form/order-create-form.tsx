@@ -37,11 +37,18 @@ export const OrderCreateForm = ({
       variant_id: string
       quantity: number
     }[]
-    shipping_address?: string
+    shipping_address: {
+      address_1: string
+      address_2?: string
+      city: string
+      country_code: string
+      postal_code: string
+      phone?: string
+    }
     billing_address?: string
     customer_id: string
     currency_code?: string
-    sales_channel_id: string
+    sales_channel_id?: string
     region_id: string
     email?: string
   }
@@ -81,7 +88,6 @@ export const OrderCreateForm = ({
       shipping_address: values.shipping_address,
       customer_id: values.customer_id,
       region_id: values.region_id,
-      sales_channel_id: "sc_01JKX2B418X0C1XPRHF7MV177T",
     })
   })
 

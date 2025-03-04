@@ -16,7 +16,7 @@ import { OrderPaymentSection } from "./components/order-payment-section"
 import { OrderSummarySection } from "./components/order-summary-section"
 import { DEFAULT_FIELDS } from "./constants"
 import { orderLoader } from "./loader"
-
+import { OrderMapSection } from "./components/order-map-section"
 export const OrderDetail = () => {
   const initialData = useLoaderData() as Awaited<ReturnType<typeof orderLoader>>
 
@@ -86,6 +86,7 @@ export const OrderDetail = () => {
         <OrderFulfillmentSection order={order} />
       </TwoColumnPage.Main>
       <TwoColumnPage.Sidebar>
+        <OrderMapSection order={order} />
         <OrderCustomerSection order={order} />
         <OrderActivitySection order={order} />
       </TwoColumnPage.Sidebar>
