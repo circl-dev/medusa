@@ -4949,7 +4949,7 @@ __metadata:
     "@types/jsdom": ^21.1.1
     "@types/react": ^18.2.14
     "@types/react-dom": ^18.2.6
-    esbuild: ^0.18.11
+    esbuild: ^0.25.0
     eslint: ^7.32.0
     jsdom: ^22.1.0
     react: ^18.2.0
@@ -18140,7 +18140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0, esbuild@npm:^0.18.11, esbuild@npm:^0.18.2":
+"esbuild@npm:^0.18.0, esbuild@npm:^0.18.2":
   version: 0.18.20
   resolution: "esbuild@npm:0.18.20"
   dependencies:
