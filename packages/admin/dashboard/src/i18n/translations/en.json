@@ -1440,6 +1440,10 @@
           "label": "Region",
           "hint": "Select which region the order should be handled in."
         },
+        "fulfillmentProvider": {
+          "label": "Fulfillment Provider",
+          "hint": "Select the fulfillment provider you want to use for the order."
+        },
         "name": {
           "label": "Name",
           "placeholder": "Order Name"

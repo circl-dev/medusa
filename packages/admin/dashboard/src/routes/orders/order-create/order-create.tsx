@@ -1,7 +1,13 @@
 import { useTranslation } from "react-i18next"
 import { RouteFocusModal } from "../../../components/modals"
 import { OrderCreateForm } from "./order-create-form"
-import { useCustomers, useProducts, useRegions } from "../../../hooks/api"
+import {
+  useCustomers,
+  useFulfillmentProviders,
+  useProducts,
+  useRegions,
+  useShippingOptions,
+} from "../../../hooks/api"
 
 export const OrderCreate = () => {
   const { t } = useTranslation()
@@ -13,13 +19,21 @@ export const OrderCreate = () => {
 
   const { regions, isLoading: loadingRegions } = useRegions()
 
+  const { fulfillment_providers, isLoading: loadingFulfillmentProviders } =
+    useFulfillmentProviders()
+
+  const { shipping_options } = useShippingOptions()
+  console.log(shipping_options)
+
   const ready =
     !!products &&
     !loadingProducts &&
     !!customers &&
     !loadingCustomers &&
     !!regions &&
-    !loadingRegions
+    !loadingRegions &&
+    !!fulfillment_providers &&
+    !loadingFulfillmentProviders
 
   return (
     <RouteFocusModal>
@@ -34,6 +48,7 @@ export const OrderCreate = () => {
           products={products}
           customers={customers}
           regions={regions}
+          fulfillmentProviders={fulfillment_providers}
         />
       )}
     </RouteFocusModal>

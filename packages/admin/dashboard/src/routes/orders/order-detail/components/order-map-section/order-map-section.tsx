@@ -7,7 +7,7 @@ type OrderMapSectionProps = {
     metadata: {
       coordinates?: {
         lat: number
-        lon: number
+        lng: number
       }
     }
   }
@@ -18,7 +18,7 @@ type OrderMetadata = {
 }
 type OrderMetadataCoordinates = {
   lat: number
-  lon: number
+  lng: number
 }
 
 const Header = () => {
@@ -38,7 +38,7 @@ export const OrderMapSection = ({ order }: OrderMapSectionProps) => {
             <Map
             coordinates={[
                 (order.metadata as OrderMetadata).coordinates.lat,
-                (order.metadata as OrderMetadata).coordinates.lon,
+                (order.metadata as OrderMetadata).coordinates.lng,
             ]}
             />
         )}

@@ -48,9 +48,11 @@ export const OrderDetail = () => {
     })
   }
 
+  console.log(order)
   const { order: orderPreview, isLoading: isPreviewLoading } = useOrderPreview(
     id!
   )
+  console.log({ orderPreview })
 
   if (isLoading || !order || isPreviewLoading) {
     return (
@@ -82,6 +84,7 @@ export const OrderDetail = () => {
         <ActiveOrderReturnSection orderPreview={orderPreview!} />
         <OrderGeneralSection order={order} />
         <OrderSummarySection order={order} />
+        {/* <OrderCirclDMSSection order={order} /> */}
         <OrderPaymentSection order={order} />
         <OrderFulfillmentSection order={order} />
       </TwoColumnPage.Main>

@@ -23,9 +23,17 @@ import {
   useReservationItems,
   useShippingOptions,
 } from "../../../../../hooks/api"
+import { OrderCreateFulfillmentMap } from "./order-create-fulfillment-map"
 
 type OrderCreateFulfillmentFormProps = {
-  order: AdminOrder
+  order: AdminOrder & {
+    metadata?: {
+      coordinates?: {
+        lat: number
+        lng: number
+      }
+    }
+  }
   requiresShipping: boolean
 }
 
@@ -48,7 +56,7 @@ export function OrderCreateFulfillmentForm({
       new Map((reservations || []).map((r) => [r.line_item_id, r.quantity])),
     [reservations]
   )
-  console.log(reservations, itemReservedQuantitiesMap)
+  console.log("ORDER", order)
 
   const [fulfillableItems, setFulfillableItems] = useState(() =>
     (order.items || []).filter(
@@ -60,13 +68,10 @@ export function OrderCreateFulfillmentForm({
 
   const form = useForm<zod.infer<typeof CreateFulfillmentSchema>>({
     defaultValues: {
-      quantity: fulfillableItems.reduce(
-        (acc, item) => {
-          acc[item.id] = getFulfillableQuantity(item)
-          return acc
-        },
-        {} as Record<string, number>
-      ),
+      quantity: fulfillableItems.reduce((acc, item) => {
+        acc[item.id] = getFulfillableQuantity(item)
+        return acc
+      }, {} as Record<string, number>),
       send_notification: !order.no_notification,
     },
     resolver: zodResolver(CreateFulfillmentSchema),
@@ -93,6 +98,10 @@ export function OrderCreateFulfillmentForm({
     control: form.control,
   })
 
+  const selectedStockLocation = stock_locations.find(
+    (l) => l.id === selectedLocationId
+  )
+
   const handleSubmit = form.handleSubmit(async (data) => {
     const selectedShippingOption = shipping_options.find(
       (o) => o.id === shippingOptionId
@@ -117,13 +126,10 @@ export function OrderCreateFulfillmentForm({
     const selectedShippingProfileId =
       selectedShippingOption?.shipping_profile_id
 
-    const itemShippingProfileMap = order.items.reduce(
-      (acc, item) => {
-        acc[item.id] = item.variant?.product?.shipping_profile?.id
-        return acc
-      },
-      {} as Record<string, string | null>
-    )
+    const itemShippingProfileMap = order.items.reduce((acc, item) => {
+      acc[item.id] = item.variant?.product?.shipping_profile?.id
+      return acc
+    }, {} as Record<string, string | null>)
 
     const payload: HttpTypes.AdminCreateOrderFulfillment = {
       location_id: selectedLocationId,
@@ -199,20 +205,19 @@ export function OrderCreateFulfillmentForm({
       })
     }
 
-    const quantityMap = itemsToFulfill.reduce(
-      (acc, item) => {
-        acc[item.id] = getFulfillableQuantity(item as OrderLineItemDTO)
-        return acc
-      },
-      {} as Record<string, number>
-    )
+    const quantityMap = itemsToFulfill.reduce((acc, item) => {
+      acc[item.id] = getFulfillableQuantity(item as OrderLineItemDTO)
+      return acc
+    }, {} as Record<string, number>)
 
     form.setValue("quantity", quantityMap)
   }, [...fulfilledQuantityArray, requiresShipping])
 
-  const differentOptionSelected =
+  const differentOptionSelected = Boolean(
     shippingOptionId &&
-    order.shipping_methods?.[0]?.shipping_option_id !== shippingOptionId
+      order.shipping_methods?.length &&
+      order.shipping_methods[0]?.shipping_option_id !== shippingOptionId
+  )
 
   return (
     <RouteFocusModal.Form form={form}>
@@ -330,6 +335,17 @@ export function OrderCreateFulfillmentForm({
                     </Alert>
                   )}
                 </div>
+                {order?.metadata?.coordinates && selectedStockLocation && (
+                  <div className="my-4">
+                    <OrderCreateFulfillmentMap
+                      stockLocation={selectedStockLocation}
+                      deliveryLocation={{
+                        lat: order.metadata.coordinates.lat,
+                        lng: order.metadata.coordinates.lng,
+                      }}
+                    />
+                  </div>
+                )}
                 <div>
                   <Form.Item className="mt-8">
                     <Form.Label>

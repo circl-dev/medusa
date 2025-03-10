@@ -53,6 +53,8 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
     )
   }, [itemsToAllocate, filterTerm])
 
+  
+
   // TODO - empty state UI
   const noItemsToAllocate = !itemsToAllocate.length
 
@@ -65,6 +67,10 @@ export function OrderAllocateItemsForm({ order }: OrderAllocateItemsFormProps) {
   })
 
   const { stock_locations = [] } = useStockLocations()
+
+  console.log("Items to allocate", itemsToAllocate)
+  console.log("Order", order)
+  console.log("Stock locations", stock_locations)
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {

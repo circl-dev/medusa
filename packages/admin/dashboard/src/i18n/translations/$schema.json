@@ -5425,6 +5425,19 @@
                   "required": ["label", "hint"],
                   "additionalProperties": false
                 },
+                "fulfillmentProvider": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "hint": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["label", "hint"],
+                  "additionalProperties": false
+                },
                 "name": {
                   "type": "object",
                   "properties": {

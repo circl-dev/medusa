@@ -3,7 +3,11 @@ import { UseFormReturn } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { OrderCreateSchemaType } from "../../../types"
 import { Form } from "../../../../../../components/common/form"
-import { AdminCustomer, AdminRegion } from "@medusajs/types"
+import {
+  AdminCustomer,
+  AdminFulfillmentProvider,
+  AdminRegion,
+} from "@medusajs/types"
 import { useRetrieveCustomerAddresses } from "../../../../../../hooks/api/customers"
 import { useMemo } from "react"
 
@@ -11,12 +15,14 @@ type OrderCreateGeneralSectionProps = {
   form: UseFormReturn<OrderCreateSchemaType>
   customers: AdminCustomer[]
   regions: AdminRegion[]
+  fulfillmentProviders: AdminFulfillmentProvider[]
 }
 
 export const OrderCreateGeneralSection = ({
   form,
   customers,
   regions,
+  fulfillmentProviders,
 }: OrderCreateGeneralSectionProps) => {
   const { t } = useTranslation()
 
@@ -65,7 +71,7 @@ export const OrderCreateGeneralSection = ({
       })
     }
   }, [form, regions, addresses])
-
+  console.log(fulfillmentProviders)
   return (
     <div id="general" className="flex flex-col gap-y-6">
       <Form.Field
@@ -163,6 +169,43 @@ export const OrderCreateGeneralSection = ({
                       )}
                     />
                   </Form.Control>
+                </Form.Item>
+              )
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="fulfillment_provider_id"
+            render={({ field: { onChange, ref, ...field } }) => {
+              return (
+                <Form.Item>
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1">
+                      <Form.Label>
+                        {t("orders.create.fields.fulfillmentProvider.label")}
+                      </Form.Label>
+                      <Form.Hint>
+                        {t("orders.create.fields.fulfillmentProvider.hint")}
+                      </Form.Hint>
+                    </div>
+                    <div className="flex-1">
+                      <Form.Control>
+                        <Select onValueChange={onChange} {...field}>
+                          <Select.Trigger className="bg-ui-bg-base" ref={ref}>
+                            <Select.Value />
+                          </Select.Trigger>
+                          <Select.Content>
+                            {fulfillmentProviders.map((r) => (
+                              <Select.Item key={r.id} value={r.id}>
+                                {r.id}
+                              </Select.Item>
+                            ))}
+                          </Select.Content>
+                        </Select>
+                      </Form.Control>
+                    </div>
+                  </div>
+                  <Form.ErrorMessage />
                 </Form.Item>
               )
             }}

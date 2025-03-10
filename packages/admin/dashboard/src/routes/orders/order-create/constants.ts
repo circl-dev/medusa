@@ -12,6 +12,7 @@ const VisitSchema = z.object({
     postal_code: z.string(),
     phone: z.string().optional(),
   }),
+  fulfillment_provider_id: z.string().optional(),
 })
 
 const NonVisitSchema = z.object({
@@ -26,6 +27,7 @@ const NonVisitSchema = z.object({
     postal_code: z.string(),
     phone: z.string().optional(),
   }),
+  fulfillment_provider_id: z.string().optional(),
   variants: z
     .record(
       z.object({

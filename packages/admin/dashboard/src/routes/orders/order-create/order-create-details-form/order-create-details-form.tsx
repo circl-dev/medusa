@@ -5,13 +5,19 @@ import { OrderCreateGeneralSection } from "./components/order-create-details-gen
 import { OrderCreateSchemaType } from "../types"
 import { SwitchBox } from "../../../../components/common/switch-box"
 import { OrderCreateExtendedSection } from "./components/order-create-details-extended-section"
-import { AdminCustomer, AdminProduct, AdminRegion } from "@medusajs/types"
+import {
+  AdminCustomer,
+  AdminFulfillmentProvider,
+  AdminProduct,
+  AdminRegion,
+} from "@medusajs/types"
 
 type OrderAttributesProps = {
   form: UseFormReturn<OrderCreateSchemaType>
   products: AdminProduct[]
   customers: AdminCustomer[]
   regions: AdminRegion[]
+  fulfillmentProviders: AdminFulfillmentProvider[]
 }
 
 export const OrderCreateDetailsForm = ({
@@ -19,6 +25,7 @@ export const OrderCreateDetailsForm = ({
   products,
   customers,
   regions,
+  fulfillmentProviders,
 }: OrderAttributesProps) => {
   const { t } = useTranslation()
   return (
@@ -37,6 +44,7 @@ export const OrderCreateDetailsForm = ({
             form={form}
             customers={customers}
             regions={regions}
+            fulfillmentProviders={fulfillmentProviders}
           />
           {!form.watch("isVisit") && (
             <OrderCreateExtendedSection form={form} products={products} />

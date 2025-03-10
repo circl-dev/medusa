@@ -27,7 +27,7 @@ export const Map = ({ coordinates, zoom = 13, className = "" }: MapProps) => {
     // Add OpenStreetMap tiles
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
-        "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
+        "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
     }).addTo(mapRef.current)
 
     // Add a marker at the coordinates
@@ -41,5 +41,10 @@ export const Map = ({ coordinates, zoom = 13, className = "" }: MapProps) => {
     }
   }, [coordinates, zoom])
 
-  return <div ref={mapContainerRef} className={`h-[400px] w-full z-0 ${className}`} />
-} 
+  return (
+    <div
+      ref={mapContainerRef}
+      className={`z-0 h-[400px] w-full ${className}`}
+    />
+  )
+}

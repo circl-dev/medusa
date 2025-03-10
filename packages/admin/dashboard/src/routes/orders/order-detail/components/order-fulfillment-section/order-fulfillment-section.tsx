@@ -40,6 +40,7 @@ export const OrderFulfillmentSection = ({
   order,
 }: OrderFulfillmentSectionProps) => {
   const fulfillments = order.fulfillments || []
+  console.log("FULFILLMENTS", fulfillments)
 
   return (
     <div className="flex flex-col gap-y-3">

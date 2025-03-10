@@ -9,18 +9,25 @@ import { sdk } from "../../../../lib/client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as zod from "zod"
-import { AdminProduct, AdminCustomer, AdminRegion } from "@medusajs/types"
+import {
+  AdminProduct,
+  AdminCustomer,
+  AdminRegion,
+  AdminFulfillmentProvider,
+} from "@medusajs/types"
 
 type OrderCreateFormProps = {
   products: AdminProduct[]
   customers: AdminCustomer[]
   regions: AdminRegion[]
+  fulfillmentProviders: AdminFulfillmentProvider[]
 }
 
 export const OrderCreateForm = ({
   products,
   customers,
   regions,
+  fulfillmentProviders,
 }: OrderCreateFormProps) => {
   const { t } = useTranslation()
   const { handleSuccess } = useRouteModal()
@@ -45,6 +52,7 @@ export const OrderCreateForm = ({
       postal_code: string
       phone?: string
     }
+    fulfillment_provider_id?: string
     billing_address?: string
     customer_id: string
     currency_code?: string
@@ -110,6 +118,7 @@ export const OrderCreateForm = ({
             products={products}
             customers={customers}
             regions={regions}
+            fulfillmentProviders={fulfillmentProviders}
           />
         </RouteFocusModal.Body>
         <RouteFocusModal.Footer>
