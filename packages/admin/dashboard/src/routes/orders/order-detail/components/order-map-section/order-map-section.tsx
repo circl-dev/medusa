@@ -30,17 +30,39 @@ const Header = () => {
 }
 
 export const OrderMapSection = ({ order }: OrderMapSectionProps) => {
+  console.log("ORDER", order)
+  const fulfillments = order.fulfillments?.filter((f) => !f.canceled_at)
+  let pickupLocation
+  if (
+    fulfillments &&
+    fulfillments.length > 0 &&
+    fulfillments[0].data !== undefined &&
+    Array.isArray(fulfillments[0].data) &&
+    fulfillments[0].data.length > 0
+  ) {
+    const fulfillment = fulfillments[0].data[0] as Record<string, unknown>
+    if (Array.isArray(fulfillment.tasks) && fulfillment.tasks.length > 0) {
+      const task = fulfillment.tasks[0] as Record<string, any>
+      pickupLocation = task.pickupLocation?.coordinates
+    }
+  }
+  console.log("PICKUP LOCATION", pickupLocation)
   return (
     <Container className="divide-y p-0">
       <Header />
       <div className="rounded-md p-4">
         {order.metadata?.coordinates && (
-            <Map
+          <Map
+            secondaryCoordinates={
+              pickupLocation
+                ? [pickupLocation.lat, pickupLocation.lng]
+                : undefined
+            }
             coordinates={[
-                (order.metadata as OrderMetadata).coordinates.lat,
-                (order.metadata as OrderMetadata).coordinates.lng,
+              (order.metadata as OrderMetadata).coordinates.lat,
+              (order.metadata as OrderMetadata).coordinates.lng,
             ]}
-            />
+          />
         )}
       </div>
     </Container>

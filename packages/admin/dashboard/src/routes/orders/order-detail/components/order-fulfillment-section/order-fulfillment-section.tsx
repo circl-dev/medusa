@@ -445,6 +445,13 @@ const Fulfillment = ({
 
       {(showShippingButton || showDeliveryButton) && (
         <div className="bg-ui-bg-subtle flex items-center justify-end gap-x-2 rounded-b-xl px-4 py-4">
+          {fulfillment && fulfillment.provider_id == "circl-dms_circl-dms" && (
+            <div>
+              <Button onClick={() => console.log("Hey")} variant="secondary">
+                Refresh Status
+              </Button>
+            </div>
+          )}
           {showDeliveryButton && (
             <Button onClick={handleMarkAsDelivered} variant="secondary">
               {t(
