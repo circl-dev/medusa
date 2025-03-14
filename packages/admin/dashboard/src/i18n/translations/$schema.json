@@ -3446,9 +3446,15 @@
             },
             "successToast": {
               "type": "string"
+            },
+            "editShippingAddress": {
+              "type": "string"
+            },
+            "editBillingAddress": {
+              "type": "string"
             }
           },
-          "required": ["header", "emailDisabledTooltip", "successToast"],
+          "required": ["header", "emailDisabledTooltip", "successToast", "editShippingAddress", "editBillingAddress"],
           "additionalProperties": false
         },
         "delete": {

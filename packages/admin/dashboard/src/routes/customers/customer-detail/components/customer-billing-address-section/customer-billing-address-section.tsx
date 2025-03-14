@@ -19,14 +19,17 @@ type CustomerAddressSectionProps = {
   addresses: HttpTypes.AdminCustomerAddress[]
 }
 
-export const CustomerAddressSection = ({
+export const CustomerBillingAddressSection = ({
   customerId,
   addresses,
 }: CustomerAddressSectionProps) => {
   const prompt = usePrompt()
   const navigate = useNavigate()
 
-  const { mutateAsync: deleteAddress } = useDeleteCustomerAddress(customerId)
+  const { mutateAsync: deleteAddress } = useDeleteCustomerAddress(
+    customerId,
+    "" // This will be set when deleting
+  )
 
   const handleDelete = async (addressId: string) => {
     const res = await prompt({
@@ -43,7 +46,7 @@ export const CustomerAddressSection = ({
     }
 
     try {
-      await deleteAddress(addressId)
+      await deleteAddress()
       toast.success("Address deleted successfully")
     } catch (error) {
       toast.error("Failed to delete address")
@@ -57,7 +60,7 @@ export const CustomerAddressSection = ({
   return (
     <Container className="p-0">
       <div className="flex items-center justify-between px-6 py-4">
-        <Heading>Addresses</Heading>
+        <Heading>Billing Addresses</Heading>
         <IconButton variant="transparent" onClick={handleAdd}>
           <Plus className="text-ui-fg-base" />
         </IconButton>
@@ -92,7 +95,7 @@ export const CustomerAddressSection = ({
                           {
                             label: "Edit",
                             icon: <PencilSquare />,
-                            to: `edit-address/${address.id}`,
+                            to: `edit-address`,
                           },
                         ],
                       },

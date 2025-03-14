@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button, Heading, Input, Text, toast } from "@medusajs/ui"
+import { Button, Checkbox, Heading, Input, Text, toast } from "@medusajs/ui"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as zod from "zod"
@@ -19,6 +19,8 @@ const AddressFormSchema = zod.object({
   city: zod.string().min(1, "City is required"),
   country_code: zod.string().min(1, "Country is required"),
   postal_code: zod.string().min(1, "Postal Code is required"),
+  is_default_shipping: zod.boolean().optional(),
+  is_default_billing: zod.boolean().optional(),
 })
 
 type CreateCustomerAddressFormProps = {
@@ -38,6 +40,7 @@ export const CreateCustomerAddressForm = ({
       city: "",
       country_code: "",
       postal_code: "",
+      is_default_shipping: false,
     },
     resolver: zodResolver(AddressFormSchema),
   })
@@ -64,7 +67,7 @@ export const CreateCustomerAddressForm = ({
         <RouteFocusModal.Body className="flex flex-1 flex-col items-center overflow-y-auto py-16">
           <div className="flex w-full max-w-[720px] flex-col gap-y-8">
             <div>
-              <Heading>{t("customers.create.header")}</Heading>
+              <Heading>{t("customers.edit.editShippingAddress")}</Heading>
               <Text size="small" className="text-ui-fg-subtle">
                 {t("customers.create.hint")}
               </Text>
@@ -130,6 +133,38 @@ export const CreateCustomerAddressForm = ({
                     <Form.Label>Postal Code</Form.Label>
                     <Form.Control>
                       <Input {...field} />
+                    </Form.Control>
+                    <Form.ErrorMessage />
+                  </Form.Item>
+                )}
+              />
+              <Form.Field
+                control={form.control}
+                name="is_default_shipping"
+                render={({ field }) => (
+                  <Form.Item>
+                    <Form.Label>Default Shipping Address</Form.Label>
+                    <Form.Control>
+                      <Checkbox
+                        {...field}
+                        value={field.value ? "true" : "false"}
+                      />
+                    </Form.Control>
+                    <Form.ErrorMessage />
+                  </Form.Item>
+                )}
+              />
+              <Form.Field
+                control={form.control}
+                name="is_default_billing"
+                render={({ field }) => (
+                  <Form.Item>
+                    <Form.Label>Default Billing Address</Form.Label>
+                    <Form.Control>
+                      <Checkbox
+                        {...field}
+                        value={field.value ? "true" : "false"}
+                      />
                     </Form.Control>
                     <Form.ErrorMessage />
                   </Form.Item>

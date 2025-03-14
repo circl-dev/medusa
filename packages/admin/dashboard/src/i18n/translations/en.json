@@ -917,7 +917,9 @@
     "edit": {
       "header": "Edit Customer",
       "emailDisabledTooltip": "The email address cannot be changed for registered customers.",
-      "successToast": "Customer {{email}} was successfully updated."
+      "successToast": "Customer {{email}} was successfully updated.",
+      "editShippingAddress": "Edit shipping address",
+      "editBillingAddress": "Edit billing address"
     },
     "delete": {
       "title": "Delete Customer",

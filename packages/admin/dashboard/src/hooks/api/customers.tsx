@@ -162,14 +162,11 @@ export const useRetrieveCustomerAddresses = (customerId: string) => {
     },
   })
 }
-export const useDeleteCustomerAddress = (
-  customerId: string,
-  addressId: string
-) => {
+export const useDeleteCustomerAddress = (customerId: string) => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (addressId: string) => {
       const path = `/admin/customers/${customerId}/addresses/${addressId}`
       return sdk.client.fetch(path, { method: "DELETE" })
     },
