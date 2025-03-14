@@ -1,5 +1,58 @@
 # @medusajs/dashboard
 
+## 2.6.1
+
+### Patch Changes
+
+- [#11731](https://github.com/medusajs/medusa/pull/11731) [`4c28efaadc01fd0782721924c3c2eff0f6f9ba7a`](https://github.com/medusajs/medusa/commit/4c28efaadc01fd0782721924c3c2eff0f6f9ba7a) Thanks [@fPolic](https://github.com/fPolic)! - fix(dashboard): correctly format date cell time
+
+- [#11738](https://github.com/medusajs/medusa/pull/11738) [`3b470f41427e487c68f89b8ee8155de716ffe861`](https://github.com/medusajs/medusa/commit/3b470f41427e487c68f89b8ee8155de716ffe861) Thanks [@olivermrbl](https://github.com/olivermrbl)! - chore: Remove ranges on Medusa packages
+
+- Updated dependencies [[`3b470f41427e487c68f89b8ee8155de716ffe861`](https://github.com/medusajs/medusa/commit/3b470f41427e487c68f89b8ee8155de716ffe861)]:
+  - @medusajs/icons@2.6.1
+  - @medusajs/ui@4.0.7
+  - @medusajs/js-sdk@2.6.1
+  - @medusajs/admin-shared@2.6.1
+
+## 2.6.0
+
+### Patch Changes
+
+- [#11487](https://github.com/medusajs/medusa/pull/11487) [`c28ae573e50b51bd3ef18de7c0e37b37963c423e`](https://github.com/medusajs/medusa/commit/c28ae573e50b51bd3ef18de7c0e37b37963c423e) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Use derrived state in DataTable
+
+- [#11690](https://github.com/medusajs/medusa/pull/11690) [`954136f13a4ff00c0fa66d8159f43b2bce90355a`](https://github.com/medusajs/medusa/commit/954136f13a4ff00c0fa66d8159f43b2bce90355a) Thanks [@riqwan](https://github.com/riqwan)! - fix(dashboard): bust variant inventory cache on inventory update
+
+- [#11664](https://github.com/medusajs/medusa/pull/11664) [`e23f204b7ca0f195e36fef2ba0bae7a686b8da4f`](https://github.com/medusajs/medusa/commit/e23f204b7ca0f195e36fef2ba0bae7a686b8da4f) Thanks [@fPolic](https://github.com/fPolic)! - fix(core-flows, dashboard, medusa): prevent creatiion of a fulfilment without items
+
+- Updated dependencies []:
+  - @medusajs/admin-shared@2.6.0
+  - @medusajs/js-sdk@2.6.0
+  - @medusajs/icons@2.6.0
+
+## 2.5.1
+
+### Patch Changes
+
+- [#11466](https://github.com/medusajs/medusa/pull/11466) [`3b69f5a105de675fda014c8b76cd511a841716c4`](https://github.com/medusajs/medusa/commit/3b69f5a105de675fda014c8b76cd511a841716c4) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Properly delete metadata keys, and fix number parsing
+
+- [#11488](https://github.com/medusajs/medusa/pull/11488) [`06cc658246687309291121f09205801e18537463`](https://github.com/medusajs/medusa/commit/06cc658246687309291121f09205801e18537463) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Allow using the Enter key in product create Textarea
+
+- [#11305](https://github.com/medusajs/medusa/pull/11305) [`a88f6576bd06522f86fb2f8bd4b49f94bd4017c1`](https://github.com/medusajs/medusa/commit/a88f6576bd06522f86fb2f8bd4b49f94bd4017c1) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - feat(dashboard,admin-vite-plugin): Add support for parallel routes
+
+- [#11462](https://github.com/medusajs/medusa/pull/11462) [`b53ea77658aa4f17b41bf52c9f51c5b7a425556b`](https://github.com/medusajs/medusa/commit/b53ea77658aa4f17b41bf52c9f51c5b7a425556b) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - feat(ui,dashboard): Move InlineTip to UI package
+
+- [#11532](https://github.com/medusajs/medusa/pull/11532) [`0307304dc679bc1533e5826e0bb726f7895a0615`](https://github.com/medusajs/medusa/commit/0307304dc679bc1533e5826e0bb726f7895a0615) Thanks [@adrien2p](https://github.com/adrien2p)! - fix(dashboard): Prevent overfetching data
+
+- [#11366](https://github.com/medusajs/medusa/pull/11366) [`03b8bda1ba31fa835ea6e8bba07160d4495039ef`](https://github.com/medusajs/medusa/commit/03b8bda1ba31fa835ea6e8bba07160d4495039ef) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(dashboard): Fix size of buttons and use Link to navigate
+
+- [#11414](https://github.com/medusajs/medusa/pull/11414) [`47edd01deec79b394552cea349f1e41b7b88723b`](https://github.com/medusajs/medusa/commit/47edd01deec79b394552cea349f1e41b7b88723b) Thanks [@kasperkristensen](https://github.com/kasperkristensen)! - fix(admin-vite-plugin,admin-bundler,ui,icons,dashboard,framework,types): Update Vite dependencies
+
+- Updated dependencies [[`32ad13813bc267a04ea95d34a479efa5309b3051`](https://github.com/medusajs/medusa/commit/32ad13813bc267a04ea95d34a479efa5309b3051), [`38a57b1ddcaabeba78dba626b7ec7985df107d07`](https://github.com/medusajs/medusa/commit/38a57b1ddcaabeba78dba626b7ec7985df107d07), [`b53ea77658aa4f17b41bf52c9f51c5b7a425556b`](https://github.com/medusajs/medusa/commit/b53ea77658aa4f17b41bf52c9f51c5b7a425556b), [`3b4997840e624ef8da1a75744b4bfb5c5a371f7c`](https://github.com/medusajs/medusa/commit/3b4997840e624ef8da1a75744b4bfb5c5a371f7c), [`f00e6bf660ab96b9d41bc3d424c8d78c54eaa8e7`](https://github.com/medusajs/medusa/commit/f00e6bf660ab96b9d41bc3d424c8d78c54eaa8e7), [`47edd01deec79b394552cea349f1e41b7b88723b`](https://github.com/medusajs/medusa/commit/47edd01deec79b394552cea349f1e41b7b88723b)]:
+  - @medusajs/js-sdk@2.5.1
+  - @medusajs/ui@4.0.6
+  - @medusajs/icons@2.5.1
+  - @medusajs/admin-shared@2.5.1
+
 ## 2.5.0
 
 ### Patch Changes

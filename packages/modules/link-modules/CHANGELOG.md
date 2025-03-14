@@ -1,5 +1,24 @@
 # @medusajs/link-modules
 
+## 2.6.1
+
+### Patch Changes
+
+- [#11738](https://github.com/medusajs/medusa/pull/11738) [`3b470f41427e487c68f89b8ee8155de716ffe861`](https://github.com/medusajs/medusa/commit/3b470f41427e487c68f89b8ee8155de716ffe861) Thanks [@olivermrbl](https://github.com/olivermrbl)! - chore: Remove ranges on Medusa packages
+
+- Updated dependencies [[`cc1309d3709b251683a0cda0ced448f8bf9f514e`](https://github.com/medusajs/medusa/commit/cc1309d3709b251683a0cda0ced448f8bf9f514e), [`3b470f41427e487c68f89b8ee8155de716ffe861`](https://github.com/medusajs/medusa/commit/3b470f41427e487c68f89b8ee8155de716ffe861), [`20cd59e622463fbd46506275648ce681869adcdf`](https://github.com/medusajs/medusa/commit/20cd59e622463fbd46506275648ce681869adcdf)]:
+  - @medusajs/framework@2.6.1
+
+## 2.6.0
+
+### Patch Changes
+
+- [#11643](https://github.com/medusajs/medusa/pull/11643) [`228b7b608dfa935618179684fa3d005f7a9aaf01`](https://github.com/medusajs/medusa/commit/228b7b608dfa935618179684fa3d005f7a9aaf01) Thanks [@adrien2p](https://github.com/adrien2p)! - Chore/link module serialization
+
+- [#11601](https://github.com/medusajs/medusa/pull/11601) [`b42f151be31161a5d7a73132ee6794b990403d76`](https://github.com/medusajs/medusa/commit/b42f151be31161a5d7a73132ee6794b990403d76) Thanks [@adrien2p](https://github.com/adrien2p)! - chore(): Improve internal repository delete algo
+
+## 2.5.1
+
 ## 2.5.0
 
 ## 2.4.0

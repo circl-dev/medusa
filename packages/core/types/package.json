@@ -1,6 +1,6 @@
 {
   "name": "@medusajs/types",
-  "version": "2.5.0",
+  "version": "2.6.1",
   "description": "Medusa Types definition",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -45,7 +45,7 @@
   "peerDependencies": {
     "awilix": "^8.0.1",
     "ioredis": "^5.4.1",
-    "vite": "^5.4.14"
+    "vite": "^5 || ^6"
   },
   "peerDependenciesMeta": {
     "ioredis": {

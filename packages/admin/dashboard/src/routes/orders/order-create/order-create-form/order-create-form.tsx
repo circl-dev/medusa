@@ -67,9 +67,10 @@ export const OrderCreateForm = ({
         method: "POST",
         body,
       }),
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       toast.success(t("orders.create.successToast"))
-
+      /* Wait for the order to be created before redirecting, since fulfillment is created asynchronously */
+      await new Promise((resolve) => setTimeout(resolve, 2000))
       handleSuccess(`../${data.id}`)
     },
     onError: (error) => {
