@@ -35,6 +35,7 @@ import {
   TotalHeader,
 } from "../../../components/table/table-cells/order/total-cell"
 import { TypeHeader } from "../../../components/table/table-cells/order/type-cell"
+import { useTranslation } from "react-i18next"
 
 // We have to use any here, as the type of Order is so complex that it lags the TS server
 const columnHelper = createColumnHelper<HttpTypes.AdminOrder>()
@@ -45,6 +46,7 @@ type UseOrderTableColumnsProps = {
 
 export const useOrderTableColumns = (props: UseOrderTableColumnsProps) => {
   const { exclude = [] } = props ?? {}
+  const { t } = useTranslation()
 
   const columns = useMemo(
     () => [
@@ -77,9 +79,9 @@ export const useOrderTableColumns = (props: UseOrderTableColumnsProps) => {
         cell: ({ getValue }) => {
           const status = getValue()
           if (status && status.is_visit) {
-            return <span>Visit</span>
+            return <span>{t("orders.visit.visit")}</span>
           } else {
-            return <span>Order</span>
+            return <span>{t("orders.visit.order")}</span>
           }
         },
       }),

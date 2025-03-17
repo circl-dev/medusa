@@ -1468,6 +1468,11 @@
           "placeholder": "Order Product Price"
         }
       }
+    },
+    "visit": {
+      "type": "Type",
+      "visit": "Visit",
+      "order": "Order"
     }
   },
   "draftOrders": {

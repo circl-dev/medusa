@@ -3454,7 +3454,13 @@
               "type": "string"
             }
           },
-          "required": ["header", "emailDisabledTooltip", "successToast", "editShippingAddress", "editBillingAddress"],
+          "required": [
+            "header",
+            "emailDisabledTooltip",
+            "successToast",
+            "editShippingAddress",
+            "editBillingAddress"
+          ],
           "additionalProperties": false
         },
         "delete": {
@@ -5360,7 +5366,6 @@
           "required": ["displayId", "refundableAmount", "returnableQuantity"],
           "additionalProperties": false
         },
-
         "create": {
           "type": "object",
           "properties": {
@@ -5535,6 +5540,22 @@
             "fields"
           ],
           "additionalProperties": false
+        },
+        "visit": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "visit": {
+              "type": "string"
+            },
+            "order": {
+              "type": "string"
+            }
+          },
+          "required": ["type", "visit", "order"],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -5563,7 +5584,8 @@
         "customer",
         "activity",
         "fields",
-        "create"
+        "create",
+        "visit"
       ],
       "additionalProperties": false
     },
