@@ -182,9 +182,14 @@ export const OrderSummarySection = ({ order }: OrderSummarySectionProps) => {
   return (
     <Container className="divide-y divide-dashed p-0">
       <Header order={order} orderPreview={orderPreview} />
-      <ItemBreakdown order={order} reservations={reservations!} />
-      <CostBreakdown order={order} />
-      <Total order={order} />
+      <Type order={order} />
+      {!order.metadata?.is_visit && (
+        <>
+          <ItemBreakdown order={order} reservations={reservations!} />
+          <CostBreakdown order={order} />
+          <Total order={order} />
+        </>
+      )}
 
       {(showAllocateButton || showReturns || showPayment || showRefund) && (
         <div className="bg-ui-bg-subtle flex items-center justify-end gap-x-2 rounded-b-xl px-4 py-4">
@@ -1117,6 +1122,37 @@ const Total = ({ order }: { order: AdminOrder }) => {
           {getStylizedAmount(
             order.summary.pending_difference || 0,
             order.currency_code
+          )}
+        </Text>
+      </div>
+    </div>
+  )
+}
+
+const Type = ({ order }: { order: AdminOrder }) => {
+  const { t } = useTranslation()
+
+  return (
+    <div className=" flex flex-col gap-y-2 px-6 py-4">
+      <div className="text-ui-fg-base flex items-center justify-between">
+        <Text
+          weight="plus"
+          className="text-ui-fg-subtle"
+          size="small"
+          leading="compact"
+        >
+          {t("orders.visit.type")}
+        </Text>
+        <Text
+          weight="plus"
+          className="text-ui-fg-subtle"
+          size="small"
+          leading="compact"
+        >
+          {t(
+            order.metadata?.is_visit
+              ? "orders.visit.visit"
+              : "orders.visit.order"
           )}
         </Text>
       </div>

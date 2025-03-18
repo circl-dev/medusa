@@ -18,6 +18,7 @@ import {
 import { getStylizedAmount } from "../../../../../lib/money-amount-helpers"
 import { OrderEditItemsSection } from "./order-edit-items-section"
 import { CreateOrderEditSchemaType, OrderEditCreateSchema } from "./schema"
+import { SwitchBox } from "../../../../../components/common/switch-box"
 
 type ReturnCreateFormProps = {
   order: AdminOrder
@@ -49,6 +50,7 @@ export const OrderEditCreateForm = ({
   const form = useForm<CreateOrderEditSchemaType>({
     defaultValues: () => {
       return Promise.resolve({
+        isVisit: order.metadata?.is_visit as boolean,
         note: "", // TODO: add note when update edit route is added
         send_notification: false, // TODO: not supported in the API ATM
       })
@@ -76,7 +78,7 @@ export const OrderEditCreateForm = ({
 
       toast.success(t("orders.edits.createSuccessToast"))
       handleSuccess()
-    } catch (e) {
+    } catch (e: any) {
       toast.error(t("general.error"), {
         description: e.message,
       })
@@ -104,44 +106,57 @@ export const OrderEditCreateForm = ({
 
         <RouteFocusModal.Body className="flex size-full justify-center overflow-y-auto">
           <div className="mt-16 w-[720px] max-w-[100%] px-4 md:p-0">
-            <Heading level="h1">{t("orders.edits.create")}</Heading>
+            <Heading className="mb-8" level="h1">
+              {t("orders.edits.create")}
+            </Heading>
+            <SwitchBox
+              control={form.control}
+              defaultValue={!!order.metadata?.is_visit}
+              name="isVisit"
+              label={t("orders.create.fields.enableVisit.label")}
+              description={t("orders.create.fields.enableVisit.hint")}
+            />
+            <div className="my-4 border-t border-dotted" />
+            {!form.watch("isVisit") && (
+              <>
+                <OrderEditItemsSection preview={preview} order={order} />
 
-            <OrderEditItemsSection preview={preview} order={order} />
+                {/* TOTALS SECTION*/}
+                <div className="mt-8 border-y border-dotted py-4">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="txt-small text-ui-fg-subtle">
+                      {t("orders.edits.currentTotal")}
+                    </span>
 
-            {/* TOTALS SECTION*/}
-            <div className="mt-8 border-y border-dotted py-4">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="txt-small text-ui-fg-subtle">
-                  {t("orders.edits.currentTotal")}
-                </span>
+                    <span className="txt-small text-ui-fg-subtle">
+                      {getStylizedAmount(order.total, order.currency_code)}
+                    </span>
+                  </div>
 
-                <span className="txt-small text-ui-fg-subtle">
-                  {getStylizedAmount(order.total, order.currency_code)}
-                </span>
-              </div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="txt-small text-ui-fg-subtle">
+                      {t("orders.edits.newTotal")}
+                    </span>
 
-              <div className="mb-2 flex items-center justify-between">
-                <span className="txt-small text-ui-fg-subtle">
-                  {t("orders.edits.newTotal")}
-                </span>
+                    <span className="txt-small text-ui-fg-subtle">
+                      {getStylizedAmount(preview.total, order.currency_code)}
+                    </span>
+                  </div>
 
-                <span className="txt-small text-ui-fg-subtle">
-                  {getStylizedAmount(preview.total, order.currency_code)}
-                </span>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between border-t border-dotted pt-4">
-                <span className="txt-small font-medium">
-                  {t("orders.exchanges.refundAmount")}
-                </span>
-                <span className="txt-small font-medium">
-                  {getStylizedAmount(
-                    preview.summary.pending_difference,
-                    order.currency_code
-                  )}
-                </span>
-              </div>
-            </div>
+                  <div className="mt-4 flex items-center justify-between border-t border-dotted pt-4">
+                    <span className="txt-small font-medium">
+                      {t("orders.exchanges.refundAmount")}
+                    </span>
+                    <span className="txt-small font-medium">
+                      {getStylizedAmount(
+                        preview.summary.pending_difference,
+                        order.currency_code
+                      )}
+                    </span>
+                  </div>
+                </div>
+              </>
+            )}
 
             {/* NOTE*/}
             <Form.Field

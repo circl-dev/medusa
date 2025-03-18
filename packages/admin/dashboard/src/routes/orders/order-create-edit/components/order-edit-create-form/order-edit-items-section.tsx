@@ -60,13 +60,13 @@ export const OrderEditItemsSection = ({
     return preview.items.filter(
       (i) =>
         i.title.toLowerCase().includes(filterTerm) ||
-        i.product_title.toLowerCase().includes(filterTerm)
+        i.product_title?.toLowerCase().includes(filterTerm)
     )
   }, [preview, filterTerm])
 
   return (
     <div>
-      <div className="mb-3 mt-8 flex items-center justify-between">
+      <div className="mb-3 mt-3 flex items-center justify-between">
         <Heading level="h2">{t("fields.items")}</Heading>
 
         <div className="flex gap-2">

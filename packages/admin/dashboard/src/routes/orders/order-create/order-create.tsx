@@ -6,7 +6,6 @@ import {
   useFulfillmentProviders,
   useProducts,
   useRegions,
-  useShippingOptions,
 } from "../../../hooks/api"
 
 export const OrderCreate = () => {
@@ -21,9 +20,6 @@ export const OrderCreate = () => {
 
   const { fulfillment_providers, isLoading: loadingFulfillmentProviders } =
     useFulfillmentProviders()
-
-  const { shipping_options } = useShippingOptions()
-  console.log(shipping_options)
 
   const ready =
     !!products &&

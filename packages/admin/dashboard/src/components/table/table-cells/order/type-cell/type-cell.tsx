@@ -5,7 +5,7 @@ export const TypeHeader = () => {
 
   return (
     <div className="flex h-full w-full items-center">
-      <span className="truncate">{t("fields.type")}</span>
+      <span className="truncate">{t("orders.visit.type")}</span>
     </div>
   )
 }

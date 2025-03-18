@@ -15,6 +15,8 @@ import {
   AdminRegion,
   AdminFulfillmentProvider,
 } from "@medusajs/types"
+import { ordersQueryKeys } from "../../../../hooks/api"
+import { queryClient } from "../../../../lib/query-client"
 
 type OrderCreateFormProps = {
   products: AdminProduct[]
@@ -71,6 +73,9 @@ export const OrderCreateForm = ({
       toast.success(t("orders.create.successToast"))
       /* Wait for the order to be created before redirecting, since fulfillment is created asynchronously */
       await new Promise((resolve) => setTimeout(resolve, 2000))
+      queryClient.invalidateQueries({
+        queryKey: ordersQueryKeys.lists(),
+      })
       handleSuccess(`../${data.id}`)
     },
     onError: (error) => {
