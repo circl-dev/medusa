@@ -19,7 +19,16 @@ import { getStylizedAmount } from "../../../../../lib/money-amount-helpers"
 import { OrderEditItemsSection } from "./order-edit-items-section"
 import { CreateOrderEditSchemaType, OrderEditCreateSchema } from "./schema"
 import { SwitchBox } from "../../../../../components/common/switch-box"
+import { useMutation } from "@tanstack/react-query"
+import { sdk } from "../../../../../lib/client"
+import { ordersQueryKeys } from "../../../../../hooks/api"
+import { queryClient } from "../../../../../lib/query-client"
 
+type AdminEditOrderInput = {
+  order_id: string
+  order_preview: AdminOrderPreview
+  is_visit?: boolean
+}
 type ReturnCreateFormProps = {
   order: AdminOrder
   preview: AdminOrderPreview
@@ -42,6 +51,35 @@ export const OrderEditCreateForm = ({
   const { mutateAsync: requestOrderEdit, isPending: isRequesting } =
     useRequestOrderEdit(order.id)
 
+  const { mutateAsync: adminOrderEdit } = useMutation<
+    any,
+    Error,
+    AdminEditOrderInput
+  >({
+    mutationFn: (body) =>
+      sdk.client.fetch(`/admin/order/edit`, {
+        method: "POST",
+        body,
+      }),
+    onSuccess: async (data) => {
+      toast.success(t("orders.create.successToast"))
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      queryClient.invalidateQueries({
+        queryKey: ordersQueryKeys.changes(order.id),
+      })
+      queryClient.invalidateQueries({
+        queryKey: ordersQueryKeys.lineItems(order.id),
+      })
+      queryClient.invalidateQueries({
+        queryKey: ordersQueryKeys.all,
+      })
+      console.log("data", data)
+      // handleSuccess(`../${data.id}`)
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
   const isRequestRunning = isCanceling || isRequesting
 
   /**
@@ -74,7 +112,12 @@ export const OrderEditCreateForm = ({
         return
       }
 
-      await requestOrderEdit()
+      // await requestOrderEdit()
+      await adminOrderEdit({
+        order_id: order.id,
+        order_preview: preview,
+        is_visit: data.isVisit,
+      })
 
       toast.success(t("orders.edits.createSuccessToast"))
       handleSuccess()
