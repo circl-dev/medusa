@@ -17,13 +17,14 @@ import { OrderSummarySection } from "./components/order-summary-section"
 import { DEFAULT_FIELDS } from "./constants"
 import { orderLoader } from "./loader"
 import { OrderMapSection } from "./components/order-map-section"
+import { OrderCirclDMSSection } from "./components/order-circl-dms-section"
 export const OrderDetail = () => {
   const initialData = useLoaderData() as Awaited<ReturnType<typeof orderLoader>>
 
   const { id } = useParams()
   const { getWidgets } = useDashboardExtension()
 
-  const { order, isLoading, isError, error } = useOrder(
+  const { order, isLoading, isError, error, refetch } = useOrder(
     id!,
     {
       fields: DEFAULT_FIELDS,
@@ -64,6 +65,11 @@ export const OrderDetail = () => {
     throw error
   }
 
+  const handleRefresh = async () => {
+    console.log("refetching")
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    refetch()
+  }
   return (
     <TwoColumnPage
       widgets={{
@@ -84,7 +90,7 @@ export const OrderDetail = () => {
         <ActiveOrderReturnSection orderPreview={orderPreview!} />
         <OrderGeneralSection order={order} />
         <OrderSummarySection order={order} />
-        {/* <OrderCirclDMSSection order={order} /> */}
+        <OrderCirclDMSSection order={order} handleRefresh={handleRefresh} />
         <OrderPaymentSection order={order} />
         <OrderFulfillmentSection order={order} />
       </TwoColumnPage.Main>

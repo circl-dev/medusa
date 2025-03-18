@@ -57,6 +57,8 @@ import { getReturnableQuantity } from "../../../../../lib/rma"
 import { CopyPaymentLink } from "../copy-payment-link/copy-payment-link"
 import ReturnInfoPopover from "./return-info-popover"
 import ShippingInfoPopover from "./shipping-info-popover"
+import { useMutation } from "@tanstack/react-query"
+import { sdk } from "../../../../../lib/client"
 
 type OrderSummarySectionProps = {
   order: AdminOrder
@@ -288,6 +290,26 @@ const Header = ({
     (i) => !(getReturnableQuantity(i) > 0)
   )
 
+  const jobId = order.metadata?.is_visit
+    ? (order.metadata?.fulfillment as any)?.id
+    : (order.fulfillments?.[0] as any)?.data?.id
+  console.log(jobId)
+  const { mutate } = useMutation<any, Error>({
+    mutationFn: () =>
+      sdk.client.fetch(`/admin/dms/refresh?order_id=${order.id}`, {
+        method: "GET",
+      }),
+    onSuccess: async (data) => {
+      toast.success("Refreshed order")
+      console.log(data)
+      /* Wait for the order to be created before redirecting, since fulfillment is created asynchronously */
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
   const isOrderEditActive = orderPreview?.order_change?.change_type === "edit"
   // State where creation of order edit was interrupted i.e. order edit is drafted but not confirmed
   const isOrderEditPending =
@@ -320,6 +342,14 @@ const Header = ({
           },
           {
             actions: [
+              {
+                label: "Refresh",
+                icon: <ArrowUturnLeft />,
+                onClick: () => {
+                  mutate()
+                },
+                disabled: !jobId,
+              },
               {
                 label: t("orders.returns.create"),
                 to: `/orders/${order.id}/returns`,

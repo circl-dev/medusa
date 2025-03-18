@@ -18,6 +18,7 @@ import {
   getOrderFulfillmentStatus,
   getOrderPaymentStatus,
 } from "../../../../../lib/order-helpers"
+import { OrderStatus, OrderStatusBadge } from "../../../common/status"
 
 type OrderGeneralSectionProps = {
   order: HttpTypes.AdminOrder
@@ -72,7 +73,8 @@ export const OrderGeneralSection = ({ order }: OrderGeneralSectionProps) => {
         <div className="flex items-center gap-x-1.5">
           <OrderBadge order={order} />
           <PaymentBadge order={order} />
-          <FulfillmentBadge order={order} />
+          {/* <FulfillmentBadge order={order} /> */}
+          <OrderStatusBadge order={order} />
         </div>
         <ActionMenu
           groups={[

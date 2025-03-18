@@ -40,8 +40,6 @@ export const OrderListTable = () => {
     count,
     pageSize: PAGE_SIZE,
   })
-
-  console.log(orders)
   if (isError) {
     throw error
   }

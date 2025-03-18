@@ -7,8 +7,14 @@ import {
 import { useMemo } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { sdk } from "../../../../../lib/client"
+import { CirclFulfillment, OrderStatus } from "../../../common/status"
 
+type TestEventInput = {
+  order_id: string
+  status: string
+}
 type OrderCirclDMSSectionProps = {
+  handleRefresh: () => void
   order: HttpTypes.AdminOrder & {
     metadata: {
       coordinates?: {
@@ -47,7 +53,10 @@ const Header = () => {
   )
 }
 
-export const OrderCirclDMSSection = ({ order }: OrderCirclDMSSectionProps) => {
+export const OrderCirclDMSSection = ({
+  order,
+  handleRefresh,
+}: OrderCirclDMSSectionProps) => {
   const { stock_locations } = useStockLocations()
   const { reservations } = useReservationItems(
     {
@@ -72,118 +81,96 @@ export const OrderCirclDMSSection = ({ order }: OrderCirclDMSSectionProps) => {
     return locations
   }, [reservations, stock_locations])
 
-  const { mutate } = useMutation<any, Error, CreateCirclDMSJobInput>({
-    mutationFn: (body: CreateCirclDMSJobInput) =>
-      sdk.client.fetch(`/admin/dms/create`, {
+  const { mutate } = useMutation<any, Error, TestEventInput>({
+    mutationFn: (body: TestEventInput) =>
+      sdk.client.fetch(`/admin/dms/refresh`, {
         method: "POST",
         body,
       }),
     onSuccess: (data) => {
-      toast.success("Circl DMS job created")
+      console.log("Done!")
+      handleRefresh()
     },
     onError: (error) => {
       toast.error(error.message)
     },
   })
 
+  console.log(order.metadata)
   return (
     <Container className="divide-y p-0">
       <Header />
-      <div className="rounded-md p-4">
-        <div className="flex flex-col gap-y-4">
-          <div className="flex flex-row items-center justify-between">
-            <Label className="text-gray-500">Pickup</Label>
-            <Label className="text-gray-500">Num. Items</Label>
-          </div>
-          <div className="flex flex-col gap-y-4">
-            {locationMaps &&
-              stock_locations &&
-              Object.keys(locationMaps).map((key) => {
-                const location = stock_locations.find((l) => l.id === key)
-                return (
-                  <div
-                    key={key}
-                    className="flex flex-row items-center justify-between"
-                  >
-                    <Text
-                      size="small"
-                      leading="compact"
-                      weight="plus"
-                      className="text-ui-fg-base"
-                    >
-                      {location?.name}
-                    </Text>
-                    <Text
-                      size="small"
-                      leading="compact"
-                      weight="plus"
-                      className="text-ui-fg-base"
-                    >
-                      {locationMaps[key].length}
-                    </Text>
-                  </div>
-                )
-              })}
-          </div>
-          <Label className="text-gray-500">Delivery</Label>
-          {order && order.shipping_address && (
-            <div className="flex flex-row items-center justify-between">
-              <Text
-                size="small"
-                leading="compact"
-                weight="plus"
-                className="text-ui-fg-base"
-              >
-                {order.shipping_address?.address_1}
-              </Text>
-              {order.metadata && order.metadata.coordinates && (
-                <Text
-                  size="small"
-                  leading="compact"
-                  weight="plus"
-                  className="text-ui-fg-base"
-                >
-                  ({order.metadata?.coordinates?.lat?.toFixed(3)}{" "}
-                  {order.metadata?.coordinates?.lng?.toFixed(3)})
-                </Text>
-              )}
-            </div>
-          )}
-          <div className="mt-8 flex flex-row items-center justify-between">
-            {order.metadata && !order.metadata.circl_dms && (
-              <>
-                <Text
-                  size="base"
-                  leading="compact"
-                  weight="plus"
-                  className="text-ui-fg-base text-gray-500"
-                >
-                  Job has not been created
-                </Text>
-                <Button
-                  variant="secondary"
-                  size="small"
-                  onClick={() => {
-                    mutate({
-                      warehouse: {
-                        fullAddress: order.shipping_address?.address_1 || "",
-                      },
-                      deliver: {
-                        fullAddress: order.shipping_address?.address_1 || "",
-                        coordinates: {
-                          lat: order.metadata.coordinates?.lat || 0,
-                          lng: order.metadata.coordinates?.lng || 0,
-                        },
-                      },
-                    })
-                  }}
-                >
-                  Send to Circl
-                </Button>
-              </>
-            )}
-          </div>
+      <div className="flex flex-col gap-4 rounded-md p-4">
+        <div className="flex items-center justify-between gap-2">
+          <Label>Job ID</Label>
+          <Text
+            size="small"
+            leading="compact"
+            weight="plus"
+            className="text-gray-500"
+          >
+            {(order.metadata?.fulfillment as CirclFulfillment)?.id}
+          </Text>
         </div>
+        <div className="flex items-center justify-between gap-2">
+          <Label>Hash</Label>
+          <Text
+            size="small"
+            leading="compact"
+            weight="plus"
+            className="text-gray-500"
+          >
+            {(order.metadata?.fulfillment as CirclFulfillment)?.hash}
+          </Text>
+        </div>
+        <div className="flex items-center justify-between gap-2">
+          <Label>Status</Label>
+          <Text
+            size="small"
+            leading="compact"
+            weight="plus"
+            className="text-gray-500"
+          >
+            {<OrderStatus order={order} />}
+          </Text>
+        </div>
+      </div>
+      <div className="flex flex-row justify-end gap-4 rounded-md p-4">
+        {(order.metadata?.fulfillment as CirclFulfillment)?.status !=
+          "job.scheduled" && (
+          <Button
+            onClick={() =>
+              mutate({ order_id: order.id, status: "job.scheduled" })
+            }
+            variant="secondary"
+          >
+            Mark as Scheduled
+          </Button>
+        )}
+
+        {(order.metadata?.fulfillment as CirclFulfillment)?.status !=
+          "job.routeStarted" && (
+          <Button 
+            variant="secondary"
+            onClick={() =>
+              mutate({ order_id: order.id, status: "job.routeStarted" })
+            }
+          >
+            Mark as Route Started
+          </Button>
+        )}
+
+        {(order.metadata?.fulfillment as CirclFulfillment)?.status !=
+          "job.completed" && (
+          <Button
+            variant="secondary"
+            onClick={() =>
+              mutate({ order_id: order.id, status: "job.completed" })
+            }
+          >
+            Mark as Completed
+          </Button>
+        )}
       </div>
     </Container>
   )

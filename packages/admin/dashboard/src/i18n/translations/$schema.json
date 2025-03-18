@@ -3713,6 +3713,29 @@
           "required": ["noRecordsMessage"],
           "additionalProperties": false
         },
+        "circl_status": {
+          "type": "object",
+          "properties": {
+            "job_created": {
+              "type": "string"
+            },
+            "job_scheduled": {
+              "type": "string"
+            },
+            "job_route_started": {
+              "type": "string"
+            },
+            "job_completed": {
+              "type": "string"
+            },
+            "job_failed": {
+              "type": "string"
+            },
+            "unknown": {
+              "type": "string"
+            }
+          }
+        },
         "status": {
           "type": "object",
           "properties": {

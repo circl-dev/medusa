@@ -18,10 +18,7 @@ import {
   DisplayIdCell,
   DisplayIdHeader,
 } from "../../../components/table/table-cells/order/display-id-cell"
-import {
-  FulfillmentStatusCell,
-  FulfillmentStatusHeader,
-} from "../../../components/table/table-cells/order/fulfillment-status-cell"
+import { FulfillmentStatusHeader } from "../../../components/table/table-cells/order/fulfillment-status-cell"
 import {
   PaymentStatusCell,
   PaymentStatusHeader,
@@ -35,6 +32,7 @@ import {
   TotalHeader,
 } from "../../../components/table/table-cells/order/total-cell"
 import { TypeHeader } from "../../../components/table/table-cells/order/type-cell"
+import { OrderStatus } from "../../../routes/orders/common/status"
 
 // We have to use any here, as the type of Order is so complex that it lags the TS server
 const columnHelper = createColumnHelper<HttpTypes.AdminOrder>()
@@ -99,12 +97,20 @@ export const useOrderTableColumns = (props: UseOrderTableColumnsProps) => {
           return <PaymentStatusCell status={status} />
         },
       }),
-      columnHelper.accessor("fulfillment_status", {
-        header: () => <FulfillmentStatusHeader />,
-        cell: ({ getValue }) => {
-          const status = getValue()
+      // columnHelper.accessor("fulfillment_status", {
+      //   header: () => <FulfillmentStatusHeader />,
+      //   cell: ({ getValue }) => {
+      //     const status = getValue()
 
-          return <FulfillmentStatusCell status={status} />
+      //     return <FulfillmentStatusCell status={status} />
+      //   },
+      // }),
+      columnHelper.display({
+        id: "order_status",
+        header: () => <FulfillmentStatusHeader />,
+        cell: ({ row }) => {
+          const order = row.original
+          return <OrderStatus order={order} />
         },
       }),
       columnHelper.accessor("total", {

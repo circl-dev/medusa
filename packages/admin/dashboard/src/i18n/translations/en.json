@@ -993,6 +993,14 @@
     "list": {
       "noRecordsMessage": "Your orders will show up here."
     },
+    "circl_status": {
+      "job_created": "Job created",
+      "job_scheduled": "Scheduled",
+      "job_route_started": "Route started",
+      "job_completed": "Completed",
+      "job_failed": "Failed",
+      "unknown": "Unknown"
+    },
     "status": {
       "not_paid": "Not paid",
       "pending": "Pending",
