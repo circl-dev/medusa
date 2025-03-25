@@ -80,7 +80,7 @@ export const OrderCreateGeneralSection = ({
         render={({ field: { onChange, ref, ...field } }) => {
           return (
             <Form.Item>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center gap-3 xl:flex-row">
                 <div className="flex-1">
                   <Form.Label>
                     {t("orders.create.fields.customer.label")}
@@ -89,7 +89,7 @@ export const OrderCreateGeneralSection = ({
                     {t("orders.create.fields.customer.hint")}
                   </Form.Hint>
                 </div>
-                <div className="flex-1">
+                <div className="w-full flex-1">
                   <Form.Control>
                     <Select onValueChange={onChange} {...field}>
                       <Select.Trigger className="bg-ui-bg-base" ref={ref}>
@@ -121,7 +121,7 @@ export const OrderCreateGeneralSection = ({
             render={({ field: { onChange, ref, ...field } }) => {
               return (
                 <Form.Item>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 xl:flex-row">
                     <div className="flex-1">
                       <Form.Label>
                         {t("orders.create.fields.region.label")}
@@ -130,7 +130,7 @@ export const OrderCreateGeneralSection = ({
                         {t("orders.create.fields.region.hint")}
                       </Form.Hint>
                     </div>
-                    <div className="flex-1">
+                    <div className="w-full flex-1">
                       <Form.Control>
                         <Select onValueChange={onChange} {...field}>
                           <Select.Trigger className="bg-ui-bg-base" ref={ref}>
@@ -179,7 +179,7 @@ export const OrderCreateGeneralSection = ({
             render={({ field: { onChange, ref, ...field } }) => {
               return (
                 <Form.Item>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 xl:flex-row">
                     <div className="flex-1">
                       <Form.Label>
                         {t("orders.create.fields.fulfillmentProvider.label")}
@@ -188,7 +188,7 @@ export const OrderCreateGeneralSection = ({
                         {t("orders.create.fields.fulfillmentProvider.hint")}
                       </Form.Hint>
                     </div>
-                    <div className="flex-1">
+                    <div className="w-full flex-1">
                       <Form.Control>
                         <Select onValueChange={onChange} {...field}>
                           <Select.Trigger className="bg-ui-bg-base" ref={ref}>

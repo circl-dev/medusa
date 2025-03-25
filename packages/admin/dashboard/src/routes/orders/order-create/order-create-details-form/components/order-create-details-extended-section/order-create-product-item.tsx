@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next"
 import { Thumbnail } from "../../../../../../components/common/thumbnail"
 import { Input, Text } from "@medusajs/ui"
 import { AdminProduct } from "@medusajs/types"
@@ -17,15 +16,13 @@ export function OrderCreateProductItem({
   product,
   onQuantityChange,
 }: OrderCreateProductItemProps) {
-  const { t } = useTranslation()
-
   const regionId = useWatch({
     control: form.control,
     name: "region_id",
   })
 
   return (
-    <div className="bg-ui-bg-subtle shadow-elevation-card-rest my-2 min-w-[720px] divide-y divide-dashed rounded-xl">
+    <div className="bg-ui-bg-subtle shadow-elevation-card-rest my-2 divide-y divide-dashed rounded-xl lg:min-w-[720px]">
       <div className="flex flex-col gap-4 p-3 text-sm">
         <div className="flex items-center gap-x-3">
           <Thumbnail src={product.thumbnail} />
