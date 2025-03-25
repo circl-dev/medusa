@@ -10,6 +10,7 @@ import {
 } from "@medusajs/types"
 import { useRetrieveCustomerAddresses } from "../../../../../../hooks/api/customers"
 import { useMemo } from "react"
+import { CountrySelect } from "../../../../../../components/inputs/country-select/country-select"
 
 type OrderCreateGeneralSectionProps = {
   form: UseFormReturn<OrderCreateSchemaType>
@@ -155,23 +156,67 @@ export const OrderCreateGeneralSection = ({
           <Form.Field
             control={form.control}
             name="shipping_address.address_1"
-            render={({ field }) => {
-              return (
-                <Form.Item>
-                  <Form.Label>
-                    {t("orders.create.fields.address.label")}
-                  </Form.Label>
-                  <Form.Control>
-                    <Input
-                      {...field}
-                      placeholder={t(
-                        "orders.create.fields.address.placeholder"
-                      )}
-                    />
-                  </Form.Control>
-                </Form.Item>
-              )
-            }}
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Address Line 1</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.address_2"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Address Line 2</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.city"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>City</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.country_code"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Country</Form.Label>
+                <Form.Control>
+                  <CountrySelect {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.postal_code"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Postal Code</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
           />
           <Form.Field
             control={form.control}

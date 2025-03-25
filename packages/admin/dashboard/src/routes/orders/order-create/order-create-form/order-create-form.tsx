@@ -35,9 +35,17 @@ export const OrderCreateForm = ({
   const { handleSuccess } = useRouteModal()
 
   const form = useForm<zod.infer<typeof OrderCreateSchema>>({
-    // TODO?
-    defaultValues: {},
+    defaultValues: {
+      shipping_address: {
+        address_1: "",
+        city: "",
+        country_code: "",
+        postal_code: "",
+        phone: "",
+      },
+    },
     resolver: zodResolver(OrderCreateSchema),
+    mode: "onTouched",
   })
 
   type CreateAdminOrderInput = {
