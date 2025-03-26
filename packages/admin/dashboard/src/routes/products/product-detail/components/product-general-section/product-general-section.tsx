@@ -101,6 +101,12 @@ export const ProductGeneralSection = ({
         title={t("fields.discountable")}
         value={product.discountable ? t("fields.true") : t("fields.false")}
       />
+      <SectionRow
+        title={t("fields.returnable")}
+        value={
+          product.metadata?.returnable ? t("fields.true") : t("fields.false")
+        }
+      />
       {displays.map((Component, index) => {
         return <Component key={index} data={product} />
       })}

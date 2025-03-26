@@ -28,6 +28,7 @@ const EditProductSchema = zod.object({
   material: zod.string().optional(),
   description: zod.string().optional(),
   discountable: zod.boolean(),
+  returnable: zod.boolean().optional(),
 })
 
 export const EditProductForm = ({ product }: EditProductFormProps) => {
@@ -47,6 +48,7 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
       handle: product.handle || "",
       description: product.description || "",
       discountable: product.discountable,
+      returnable: product.metadata?.returnable as boolean | undefined,
     },
     schema: EditProductSchema,
     configs: configs,
@@ -60,13 +62,20 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
 
     const nullableData = transformNullableFormData(optional)
 
+    /* Remove the returnable from nullableData */
+    const { returnable, ...rest } = nullableData
+
     await mutateAsync(
       {
         title,
         discountable,
         handle,
         status: status as HttpTypes.AdminProductStatus,
-        ...nullableData,
+        metadata: {
+          ...product.metadata,
+          returnable: data.returnable,
+        },
+        ...rest,
       },
       {
         onSuccess: ({ product }) => {
@@ -221,6 +230,12 @@ export const EditProductForm = ({ product }: EditProductFormProps) => {
               name="discountable"
               label={t("fields.discountable")}
               description={t("products.discountableHint")}
+            />
+            <SwitchBox
+              control={form.control}
+              name="returnable"
+              label={t("fields.returnable")}
+              description={t("products.returnableHint")}
             />
             <FormExtensionZone fields={fields} form={form} />
           </div>

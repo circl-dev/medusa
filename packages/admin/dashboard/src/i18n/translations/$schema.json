@@ -1983,6 +1983,9 @@
         "discountableHint": {
           "type": "string"
         },
+        "returnableHint": {
+          "type": "string"
+        },
         "noSalesChannels": {
           "type": "string"
         },
@@ -2067,6 +2070,19 @@
               "additionalProperties": false
             },
             "discountable": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "hint": {
+                  "type": "string"
+                }
+              },
+              "required": ["label", "hint"],
+              "additionalProperties": false
+            },
+            "returnable": {
               "type": "object",
               "properties": {
                 "label": {
@@ -2281,6 +2297,7 @@
             "handle",
             "description",
             "discountable",
+            "returnable",
             "shipping_profile",
             "type",
             "collection",
@@ -2665,6 +2682,7 @@
         "editPrices",
         "media",
         "discountableHint",
+        "returnableHint",
         "noSalesChannels",
         "variantCount_one",
         "variantCount_other",
@@ -10754,6 +10772,9 @@
         "discountable": {
           "type": "string"
         },
+        "returnable": {
+          "type": "string"
+        },
         "handle": {
           "type": "string"
         },
@@ -11170,6 +11191,7 @@
         "category",
         "collection",
         "discountable",
+        "returnable",
         "handle",
         "subtitle",
         "by",

@@ -524,6 +524,7 @@
       "successToast": "Media was successfully updated."
     },
     "discountableHint": "When unchecked, discounts will not be applied to this product.",
+    "returnableHint": "When checked, this product originates a returnable empty container",
     "noSalesChannels": "Not available in any sales channels",
     "variantCount_one": "{{count}} variant",
     "variantCount_other": "{{count}} variants",
@@ -553,6 +554,10 @@
       "discountable": {
         "label": "Discountable",
         "hint": "When unchecked, discounts will not be applied to this product"
+      },
+      "returnable": {
+        "label": "Returnable",
+        "hint": "When checked, this product originates a returnable empty container"
       },
       "shipping_profile": {
         "label": "Shipping profile",
@@ -2895,6 +2900,7 @@
     "category": "Category",
     "collection": "Collection",
     "discountable": "Discountable",
+    "returnable": "Returnable",
     "handle": "Handle",
     "subtitle": "Subtitle",
     "by": "By",
