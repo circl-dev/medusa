@@ -10,6 +10,7 @@ import {
 } from "@medusajs/types"
 import { useRetrieveCustomerAddresses } from "../../../../../../hooks/api/customers"
 import { useMemo } from "react"
+import { CountrySelect } from "../../../../../../components/inputs/country-select/country-select"
 
 type OrderCreateGeneralSectionProps = {
   form: UseFormReturn<OrderCreateSchemaType>
@@ -80,7 +81,7 @@ export const OrderCreateGeneralSection = ({
         render={({ field: { onChange, ref, ...field } }) => {
           return (
             <Form.Item>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center gap-3 xl:flex-row">
                 <div className="flex-1">
                   <Form.Label>
                     {t("orders.create.fields.customer.label")}
@@ -89,7 +90,7 @@ export const OrderCreateGeneralSection = ({
                     {t("orders.create.fields.customer.hint")}
                   </Form.Hint>
                 </div>
-                <div className="flex-1">
+                <div className="w-full flex-1">
                   <Form.Control>
                     <Select onValueChange={onChange} {...field}>
                       <Select.Trigger className="bg-ui-bg-base" ref={ref}>
@@ -121,7 +122,7 @@ export const OrderCreateGeneralSection = ({
             render={({ field: { onChange, ref, ...field } }) => {
               return (
                 <Form.Item>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 xl:flex-row">
                     <div className="flex-1">
                       <Form.Label>
                         {t("orders.create.fields.region.label")}
@@ -130,7 +131,7 @@ export const OrderCreateGeneralSection = ({
                         {t("orders.create.fields.region.hint")}
                       </Form.Hint>
                     </div>
-                    <div className="flex-1">
+                    <div className="w-full flex-1">
                       <Form.Control>
                         <Select onValueChange={onChange} {...field}>
                           <Select.Trigger className="bg-ui-bg-base" ref={ref}>
@@ -155,23 +156,67 @@ export const OrderCreateGeneralSection = ({
           <Form.Field
             control={form.control}
             name="shipping_address.address_1"
-            render={({ field }) => {
-              return (
-                <Form.Item>
-                  <Form.Label>
-                    {t("orders.create.fields.address.label")}
-                  </Form.Label>
-                  <Form.Control>
-                    <Input
-                      {...field}
-                      placeholder={t(
-                        "orders.create.fields.address.placeholder"
-                      )}
-                    />
-                  </Form.Control>
-                </Form.Item>
-              )
-            }}
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Address Line 1</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.address_2"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Address Line 2</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.city"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>City</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.country_code"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Country</Form.Label>
+                <Form.Control>
+                  <CountrySelect {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
+          />
+          <Form.Field
+            control={form.control}
+            name="shipping_address.postal_code"
+            render={({ field }) => (
+              <Form.Item>
+                <Form.Label>Postal Code</Form.Label>
+                <Form.Control>
+                  <Input {...field} />
+                </Form.Control>
+                <Form.ErrorMessage />
+              </Form.Item>
+            )}
           />
           <Form.Field
             control={form.control}
@@ -179,7 +224,7 @@ export const OrderCreateGeneralSection = ({
             render={({ field: { onChange, ref, ...field } }) => {
               return (
                 <Form.Item>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 xl:flex-row">
                     <div className="flex-1">
                       <Form.Label>
                         {t("orders.create.fields.fulfillmentProvider.label")}
@@ -188,7 +233,7 @@ export const OrderCreateGeneralSection = ({
                         {t("orders.create.fields.fulfillmentProvider.hint")}
                       </Form.Hint>
                     </div>
-                    <div className="flex-1">
+                    <div className="w-full flex-1">
                       <Form.Control>
                         <Select onValueChange={onChange} {...field}>
                           <Select.Trigger className="bg-ui-bg-base" ref={ref}>

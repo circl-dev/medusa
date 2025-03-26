@@ -37,12 +37,12 @@ export const OrderCreateExtendedSection = ({
   return (
     <div id="general" className="flex flex-col gap-y-6">
       <Form.Item className="mt-8">
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col items-center gap-3 xl:flex-row">
           <div className="flex-1">
             <Form.Label>{t("orders.create.fields.products.label")}</Form.Label>
             <Form.Hint>{t("orders.create.fields.products.hint")}</Form.Hint>
           </div>
-          <div className="flex-1">
+          <div className="w-full flex-1">
             <Input
               value={filterTerm}
               onChange={(e) => setFilterTerm(e.target.value)}
