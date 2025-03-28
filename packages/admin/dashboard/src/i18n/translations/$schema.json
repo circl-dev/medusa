@@ -3470,6 +3470,9 @@
             },
             "editBillingAddress": {
               "type": "string"
+            },
+            "addShippingAddress": {
+              "type": "string"
             }
           },
           "required": [
@@ -3477,7 +3480,8 @@
             "emailDisabledTooltip",
             "successToast",
             "editShippingAddress",
-            "editBillingAddress"
+            "editBillingAddress",
+            "addShippingAddress"
           ],
           "additionalProperties": false
         },

@@ -24,9 +24,13 @@ export const CustomerAddressEdit = () => {
   return (
     <RouteDrawer>
       <RouteDrawer.Header>
-        <Heading>{t("customers.edit.editShippingAddress")}</Heading>
+        <Heading>
+          {!isLoading && customer && target_address
+            ? t("customers.edit.editShippingAddress")
+            : t("customers.edit.addShippingAddress")}
+        </Heading>
       </RouteDrawer.Header>
-      {!isLoading && customer && target_address && (
+      {!isLoading && customer && (
         <CustomerAddressEditForm customerId={id!} address={target_address} />
       )}
     </RouteDrawer>
