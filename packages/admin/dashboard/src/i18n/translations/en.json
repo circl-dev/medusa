@@ -919,7 +919,8 @@
       "emailDisabledTooltip": "The email address cannot be changed for registered customers.",
       "successToast": "Customer {{email}} was successfully updated.",
       "editShippingAddress": "Edit shipping address",
-      "editBillingAddress": "Edit billing address"
+      "editBillingAddress": "Edit billing address",
+      "addShippingAddress": "Add shipping address"
     },
     "delete": {
       "title": "Delete Customer",
@@ -1344,7 +1345,8 @@
       "editEmail": "Edit email",
       "transferOwnership": "Transfer ownership",
       "editBillingAddress": "Edit billing address",
-      "editShippingAddress": "Edit shipping address"
+      "editShippingAddress": "Edit shipping address",
+      "addShippingAddress": "Add shipping address"
     },
     "activity": {
       "header": "Activity",

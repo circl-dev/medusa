@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { HttpTypes } from "@medusajs/types"
 import { Button, toast } from "@medusajs/ui"
 import { useForm } from "react-hook-form"
-import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 
 import { RouteDrawer, useRouteModal } from "../../../../../components/modals"
