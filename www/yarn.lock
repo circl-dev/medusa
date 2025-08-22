@@ -7531,7 +7531,7 @@ __metadata:
     cpy-cli: ^5.0.0
     eslint: ^9.13.0
     framer-motion: ^11.11.9
-    mermaid: ^10.9.0
+    mermaid: ^10.9.4
     minisearch: ^7.1.1
     next: 15.0.4
     npm-to-yarn: ^2.1.0
@@ -7619,10 +7619,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.0.5":
-  version: 3.0.9
-  resolution: "dompurify@npm:3.0.9"
-  checksum: 4da4b86e4010822d01392e25f0686367a4f1e1048a4681178c725de9a817410c5650c17b326c08a018f79437b3177a4bdc7faf4c37b0cf2547bc280aa2038a16
+"dompurify@npm:^3.0.5 <3.1.7":
+  version: 3.1.6
+  resolution: "dompurify@npm:3.1.6"
+  checksum: 3de1cca187c78d3d8cb4134fc2985b644d6a81f6b4e024c77cfb04c1c2f38544ccf7b0ea37a48ce22fcca64594170ed7c22252574c75b801c44345cdd7b06c64
   languageName: node
   linkType: hard
 
@@ -11183,9 +11183,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mermaid@npm:^10.9.0":
-  version: 10.9.0
-  resolution: "mermaid@npm:10.9.0"
+"mermaid@npm:^10.9.4":
+  version: 10.9.4
+  resolution: "mermaid@npm:10.9.4"
   dependencies:
     "@braintree/sanitize-url": ^6.0.1
     "@types/d3-scale": ^4.0.3
@@ -11196,7 +11196,7 @@ __metadata:
     d3-sankey: ^0.12.3
     dagre-d3-es: 7.0.10
     dayjs: ^1.11.7
-    dompurify: ^3.0.5
+    dompurify: ^3.0.5 <3.1.7
     elkjs: ^0.9.0
     katex: ^0.16.9
     khroma: ^2.0.0
@@ -11207,7 +11207,7 @@ __metadata:
     ts-dedent: ^2.2.0
     uuid: ^9.0.0
     web-worker: ^1.2.0
-  checksum: ff1a96c8cd3384f64c9254d18f795f7fb2e454c47595c3deadbf6468544c607c5968c4a4bff8220bf27ccf0294f5527bc93660eea9958b4bc03e5e9871eaf57e
+  checksum: e43cf876b76a7137961ed0557810b974bcf3948cc1b60b8b233b7b284b0aef48e7c425bb873723151b6eda4faca9f585e156f32def2d9bda0cad870cda353087
   languageName: node
   linkType: hard
 
